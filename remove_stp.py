@@ -10,7 +10,8 @@ from pprint import pprint
 import os
 from pathlib import Path
 
-from meraki_utils import meraki_error, other_error
+from meraki_utils import connect_to_meraki, meraki_error, other_error
+from set_desk_port_to_wifi_trunk import dashboard
 
 # Constants
 API_KEY = os.getenv('MERAKI_API_KEY')
@@ -21,11 +22,13 @@ LOG_PATH = Path('logs')
 if not LOG_PATH.exists():
     LOG_PATH.mkdir(parents=True)
 
-dashboard = meraki.DashboardAPI(base_url='https://api.meraki.com/api/v1/',
-                                log_path=LOG_PATH,
-                                # log_file_prefix=f'{}',
-                                print_console=False,
-                                output_log=False)
+dashboard = connect_to_meraki(API_KEY)
+
+# dashboard = meraki.DashboardAPI(base_url='https://api.meraki.com/api/v1/',
+#                                 log_path=LOG_PATH,
+#                                 # log_file_prefix=f'{}',
+#                                 print_console=False,
+#                                 output_log=False)
 
 # Get organizations
 print(f"Obtaining organizations...")
