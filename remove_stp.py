@@ -24,12 +24,6 @@ if not LOG_PATH.exists():
 
 dashboard = connect_to_meraki(API_KEY)
 
-# dashboard = meraki.DashboardAPI(base_url='https://api.meraki.com/api/v1/',
-#                                 log_path=LOG_PATH,
-#                                 # log_file_prefix=f'{}',
-#                                 print_console=False,
-#                                 output_log=False)
-
 # Get organizations
 print(f"Obtaining organizations...")
 try:
