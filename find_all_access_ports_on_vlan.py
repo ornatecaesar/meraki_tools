@@ -9,6 +9,14 @@ vlan_of_interest = '999'
 
 dashboard = connect_to_meraki(API_KEY)
 
+action_batch = {
+    'confirmed': True,
+    'synchronous': False,
+    'actions': [
+
+    ]
+}
+
 print(f"Getting organizations...")
 try:
     organizations = dashboard.organizations.getOrganizations()
@@ -43,6 +51,8 @@ for network in networks:
         other_error(e)
         exit(1)
 
+    switches = [s for s in switches if 'MS' in s['model']]
+
     for switch in switches:
         print(f"Obtaining ports on switch \'{switch['name']}\' in network \'{network['name']}\'")
         try:
@@ -54,4 +64,4 @@ for network in networks:
             other_error(e)
             exit(1)
 
-
+        #TODO: implement Action Batch for updating switch ports on switch by switch basis

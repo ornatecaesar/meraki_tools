@@ -1,11 +1,11 @@
 import meraki
 
-def connect_to_meraki(api_key):
+def connect_to_meraki(api_key, print_console=False):
 
     dashboard = meraki.DashboardAPI(
         api_key=api_key,
         base_url='https://api.meraki.com/api/v1',
-        print_console=False,
+        print_console=print_console,
         output_log=False,
         log_file_prefix=f'{__file__}'
     )
