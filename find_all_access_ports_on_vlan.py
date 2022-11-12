@@ -5,7 +5,8 @@ from meraki_utils import connect_to_meraki, meraki_error, other_error
 
 
 API_KEY = os.getenv('MERAKI_API_KEY')
-vlan_of_interest = '999'
+vlan_of_interest = 999
+target_network = {'College'}
 
 dashboard = connect_to_meraki(API_KEY)
 
@@ -41,6 +42,7 @@ except Exception as e:
 networks = [n for n in networks if 'switch' in n['productTypes']]
 
 for network in networks:
+
     print(f"Obtaining switches in network: {network['name']}")
     try:
         switches = dashboard.networks.getNetworkDevices(networkId=network['id'])
@@ -64,4 +66,25 @@ for network in networks:
             other_error(e)
             exit(1)
 
-        #TODO: implement Action Batch for updating switch ports on switch by switch basis
+        access_ports = ([p for p in ports if p['vlan'] == vlan_of_interest if p['type'] == 'access'])
+        if len(access_ports) > 0:
+            for port in access_ports:
+                actions = {
+                    'resource': f"/devices/{switch['serial']}/switch/ports/{str(port['portId'])}",
+                    'operation': 'update',
+                    'body': {'vlan': 1}
+                    }
+                action_batch['actions'].append(actions)
+
+
+
+try:
+    dashboard.organizations.createOrganizationActionBatch(organizationId=organizations[0]['id'], actions=action_batch)
+except meraki.APIError as e:
+    meraki_error(e)
+    exit(1)
+except Exception as e:
+    other_error(e)
+    exit(1)
+
+
