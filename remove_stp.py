@@ -6,7 +6,6 @@ Disable RSTP and enable BPDUGuard on all access ports
 
 import json
 import meraki
-from pprint import pprint
 import os
 from pathlib import Path
 
@@ -30,8 +29,10 @@ try:
     organizations = dashboard.organizations.getOrganizations()
 except meraki.APIError as e:
     meraki_error(e)
+    exit(1)
 except Exception as e:
     other_error(e)
+    exit(1)
 
 # Get networks
 print(f"Obtaining networks in Organization: {organizations[0]['name']}.")
@@ -39,8 +40,10 @@ try:
     networks = dashboard.organizations.getOrganizationNetworks(organizationId=organizations[0]['id'])
 except meraki.APIError as e:
     meraki_error(e)
+    exit(1)
 except Exception as e:
     other_error(e)
+    exit(1)
 
 networks = [n for n in networks if 'switch' in n['productTypes']]
 
@@ -93,6 +96,7 @@ for network in networks:
                     exit(1)
 
                 # if the port update was successful display the new config from the update response
+                #TODO: Improve verfication check to ensure not checking against a previous port
                 if new_port_config:
                     if new_port_config['rstpEnabled'] == switch_port_conf['rstpEnabled'] or \
                             new_port_config['stpGuard'] == switch_port_conf['stpGuard']:
