@@ -10,7 +10,7 @@ import os
 from pathlib import Path
 
 from meraki_utils import connect_to_meraki, meraki_error, other_error
-from set_desk_port_to_wifi_trunk import dashboard
+
 
 # Constants
 API_KEY = os.getenv('MERAKI_API_KEY')
@@ -62,6 +62,7 @@ for network in networks:
 
     # Remove all non-switch devices
     switches = [s for s in switches if 'MS' in s['model']]
+    switches = [s for s in switches if 'RH201' in s['name']]
 
     for switch in switches:
         # Get all ports on the switch
@@ -75,6 +76,7 @@ for network in networks:
             other_error(e)
             exit(1)
 
+        #switch_ports = [p for p in switch_ports if p['portId'] == '17']
         for port in switch_ports:
             if port['type'] == 'access':
 
@@ -85,9 +87,11 @@ for network in networks:
                 }
 
                 # Update switchport with new config
+                print(f"Updating configuration on port {port['portId']}.")
                 try:
                     new_port_config = dashboard.switch.updateDeviceSwitchPort(switch['serial'], port['portId'],
                                                                               **switch_port_conf)
+
                 except meraki.APIError as e:
                     meraki_error(e)
                     exit(1)
@@ -97,9 +101,10 @@ for network in networks:
 
                 # if the port update was successful display the new config from the update response
                 #TODO: Improve verfication check to ensure not checking against a previous port
-                if new_port_config:
+                if new_port_config['portId'] == port['portId']:
                     if new_port_config['rstpEnabled'] == switch_port_conf['rstpEnabled'] or \
                             new_port_config['stpGuard'] == switch_port_conf['stpGuard']:
                         print(f"New Configuration updated on port {port['portId']} on {switch['name']}:")
                         print(f"\tRSTP Status:      {new_port_config['rstpEnabled']}")
                         print(f"\tSTP Guard Mode:   {new_port_config['stpGuard']}")
+
