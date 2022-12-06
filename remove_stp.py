@@ -62,7 +62,7 @@ for network in networks:
 
     # Remove all non-switch devices
     switches = [s for s in switches if 'MS' in s['model']]
-    switches = [s for s in switches if 'RH201' in s['name']]
+    switches = [s for s in switches if 'FAC01' in s['name']]
 
     for switch in switches:
         # Get all ports on the switch
@@ -76,8 +76,9 @@ for network in networks:
             other_error(e)
             exit(1)
 
-        #switch_ports = [p for p in switch_ports if p['portId'] == '17']
         for port in switch_ports:
+
+            #TODO: Convert to Action Batch
             if port['type'] == 'access':
 
                 # New port configuration
