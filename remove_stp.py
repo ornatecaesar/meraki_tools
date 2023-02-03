@@ -25,17 +25,9 @@ dashboard = connect_to_meraki(API_KEY)
 
 actions = []
 
+
 def add_to_action_batch(switch_serial, port_number):
-    if len(actions) < 100:
-        action = {
-            'resource': f'/devices/{switch_serial}/switch/ports/{port_number}',
-            'operation': 'update',
-            'body': {
-                'rstpEnabled': False,
-                'stpGuard': 'bpdu guard'
-            }
-        }
-        actions.append(action)
+
 
 # Get organizations
 print(f"Obtaining organizations...")
@@ -92,14 +84,24 @@ for network in networks:
         # iterate over the ports and if the current port is an access port, add the port to the action batch
         for port in switch_ports:
             if port['type'] == 'access':
-                add_to_action_batch(switch['serial'], port['portId'])
+                if len(actions) < 100:
+                    actions.append(
+                        {
+                            'resource': f"/devices/{switch['serial']}/switch/ports/{port['portId']}",
+                            'operation': 'update',
+                            'body': {
+                                'rstpEnabled': False,
+                                'stpGuard': 'bpdu guard'
+                            }
+                        }
+                    )
 
+        if len(actions) >= 1:
+            response = dashboard.organizations.createOrganizationActionBatch(
+                organizationId=organizations[0]['id'],
+                actions=actions,
+                confirmed=True,
+                synchronous=False
+            )
 
-response = dashboard.organizations.createOrganizationActionBatch(
-    organizationId=organizations[0]['id'],
-    actions=actions,
-    confirmed=True,
-    synchronous=False
-)
-
-pprint(response, indent=4)
+        pprint(response, indent=4)
