@@ -70,7 +70,7 @@ for network in networks:
         meraki_error(e)
         exit(1)
     except Exception as e:
-        other_error(e)
+        other_error(e)#
         exit(1)
 
     # Remove all non-switch devices
