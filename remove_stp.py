@@ -23,11 +23,8 @@ if not LOG_PATH.exists():
 
 dashboard = connect_to_meraki(API_KEY)
 
+# List for added action batches
 actions = []
-
-
-def add_to_action_batch(switch_serial, port_number):
-
 
 # Get organizations
 print(f"Obtaining organizations...")
