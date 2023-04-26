@@ -1,3 +1,5 @@
+import os
+import logging
 import meraki
 
 def connect_to_meraki(api_key, print_console=False):

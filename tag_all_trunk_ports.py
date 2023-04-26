@@ -5,10 +5,18 @@ Add a tag to all trunk ports
 """
 
 import os
+from pathlib import Path
+import logging
 import meraki
 from meraki_utils import connect_to_meraki, meraki_error, other_error
 
 API_KEY = os.getenv('MERAKI_API_KEY')
+
+# Setup logging
+logging_dir = Path('logs')
+if not logging_dir.exists():
+    logging_dir.mkdir(parents=True)
+
 
 actions = []
 
@@ -41,7 +49,8 @@ for org in organizations:
         except meraki.APIError as e:
             meraki_error(e)
         except Exception as e:
-            other_error()
+            other_error(e)
+
 
         # Only interested in the Switch devices
         switches = [d for d in devices if d['model'].startswith('MS')]
@@ -56,14 +65,18 @@ for org in organizations:
 
             switch_trunk_ports = [port for port in switch_ports if port['type'] == 'trunk' if port['vlan'] == 1001]
 
+
             for port in switch_trunk_ports:
-                if len(actions) < 100:
+                # Get the current tags of the port and append 'Trunk' to list nested in a dictionary
+                if len(actions) < 2:
+                    tags = port['tags']
+                    tags.append('Trunk')
                     actions.append(
                         {
                             'resource': f"devices/{switch['serial']}/switch/ports/{port['portId']}",
                             'operation': 'update',
                             'body': {
-                                'tags': ['Trunk']
+                                'tags': tags
                             }
                         }
                     )
