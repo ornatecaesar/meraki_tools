@@ -64,7 +64,7 @@ for network in networks:
 
     # Remove all non-switch devices
     switches = [s for s in switches if 'MS' in s['model']]
-    switches = [s for s in switches if 'CSWSBU01' in s['name']]
+    switches = [s for s in switches if 'C-SW-GBG-03' in s['name']]
 
     for switch in switches:
         # Get all ports on the switch
