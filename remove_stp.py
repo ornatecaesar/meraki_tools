@@ -25,7 +25,7 @@ if not LOG_PATH.exists():
 script_name = os.path.basename(__file__)
 script_name = os.path.splitext(script_name)[0]
 log_file_name = f"{script_name}.log"
-logging.basicConfig(filename=f'logs/{log_file_name}.log',
+logging.basicConfig(filename=f'logs/{log_file_name}',
                     level=logging.WARNING,
                     format='%(asctime)s %(levelname)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S')
@@ -80,7 +80,6 @@ for network in networks:
 
     # Remove all non-switch devices
     switches = [s for s in switches if 'MS' in s['model']]
-    # switches = [s for s in switches if 'C-SW-WHG-02' in s['name']]
 
     for switch in switches:
         # Get all ports on the switch
@@ -96,9 +95,10 @@ for network in networks:
             logging.error(e)
             exit(1)
 
-        # iterate over the ports and if the current port is an access port, add the port to the action batch
+        # iterate over the ports and configure appropriate STP settings
         for port in switch_ports:
             if port['type'] == 'access':
+                # If Access port, disable RSTP and enable BPDU Guard
                 if len(actions) < 100:
                     actions.append(
                         {
@@ -110,7 +110,22 @@ for network in networks:
                             }
                         }
                     )
-                    logging.info(f"Adding port {port['portId']} on switch {switch['name']} to action batch.")
+                    logging.info(f"Added port {port['portId']} on switch {switch['name']} to action batch.")
+            elif port['type'] == 'trunk':
+                # If Trunk port, enable RSTP and disable BPDU Guard
+                if len(actions) < 100:
+                    actions.append(
+                        {
+                            'resource': f"/devices/{switch['serial']}/switch/ports/{port['portId']}",
+                            'operation': 'update',
+                            'body': {
+                                'rstpEnabled': True,
+                                'stpGuard': 'disabled'
+                            }
+                        }
+                    )
+                    logging.info(f"Added port {port['portId']} on switch {switch['name']} to action batch.")
+
 
         if len(actions) >= 1:
             try:
@@ -121,9 +136,8 @@ for network in networks:
                     confirmed=True,
                     synchronous=False
                 )
+                logging.info(f"Action batch complete.")
+                actions = []
             except Exception as e:
                 logging.error(f"Unable to perform action batch on switch {switch['name']}. Error: {e}")
-
-            actions = []
-
-        pprint(response, indent=4)
+                exit(1)
