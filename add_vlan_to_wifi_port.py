@@ -23,7 +23,7 @@ logging.getLogger().setLevel(logging.WARNING)
 logging.getLogger('meraki').setLevel(logging.WARNING)
 
 actions = []
-vlan_to_add = 2000
+vlan_to_add = 56
 
 dashboard = connect_to_meraki(API_KEY)
 
@@ -58,7 +58,7 @@ for org in organizations:
 
         # Only interested in the Switch devices
         switches = [d for d in devices if d['model'].startswith('MS')]
-        switches = [s for s in switches if 'KBG' in s['name']]
+        switches = [s for s in switches if 'CORE-02' in s['name']]
 
         for switch in switches:
             try:
@@ -70,26 +70,28 @@ for org in organizations:
 
             # For each port, check if it is a Trunk and has native VLAN 16
             for port in switch_ports:
-                if port['portId'] == '18':
-                    if port['type'] == 'trunk' and port['vlan'] == 16:
-                        # Add the port to the action batch if the action batch is less than 100, the API limit
-                        if len(actions) < 100:
-                            logging.info(f"Adding port {port['portId']} on switch {switch['name']} to action batch.")
-                            # Get currently allowed VLANs on the port
-                            allowed_vlans = port['allowedVlans']
-                            # Add VLAN 16 to the allowed VLANs
-                            allowed_vlans += f",{vlan_to_add}"
-                            actions.append(
-                                {
-                                    "resource": f"/devices/{switch['serial']}/switch/ports/{port['portId']}",
-                                    'operation': 'update',
-                                    'body': {
-                                        'allowedVlans': allowed_vlans
-                                    }
+                # If the port is a trunk, and it's native VLAN is 16 (trunk to AP)
+                # or the port has a native vlan of 1001 and also allows vlan 16 tagged (switch trunk)
+                if (port['type'] == 'trunk' and (
+                        port['vlan'] == 16 or (port['vlan'] == 1001 and '16' in port['allowedVlans'].split(',')))):
+                    # Add the port to the action batch if the action batch is less than 100, the API limit
+                    if len(actions) < 100:
+                        logging.info(f"Adding port {port['portId']} on switch {switch['name']} to action batch.")
+                        # Get currently allowed VLANs on the port
+                        allowed_vlans = port['allowedVlans']
+                        # Add new VLAN to the allowed VLANs
+                        allowed_vlans += f",{vlan_to_add}"
+                        actions.append(
+                            {
+                                "resource": f"/devices/{switch['serial']}/switch/ports/{port['portId']}",
+                                'operation': 'update',
+                                'body': {
+                                    'allowedVlans': allowed_vlans
                                 }
-                            )
+                            }
+                        )
 
-            if len(actions) >= 1:
+            if len(actions) < 99:
                 try:
                     logging.info(f"Executing Action Batch")
                     response = dashboard.organizations.createOrganizationActionBatch(
