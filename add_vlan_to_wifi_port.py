@@ -25,6 +25,26 @@ logging.getLogger('meraki').setLevel(logging.WARNING)
 actions = []
 vlan_to_add = 56
 
+def is_vlan_in_list(vlan, vlan_list_string):
+    """
+    Checks if the WiFi management vlan number is within the allowedVLan list including with a vlan range
+    :param vlan: Existing VLAN contained within the allowedVlan list. In this case WiFi Management VLAN 16
+    :param vlan_list_string: The list
+    :return: Boolean
+    """
+    vlan_list = vlan_list_string.split(',')
+
+    for item in vlan_list:
+        if '-' in item:
+            range_start, range_end = item.split('-')
+            if int(range_start) <= vlan <= int(range_end):
+                return True
+        else:
+            if int(item) == vlan:
+                return True
+
+    return False
+
 dashboard = connect_to_meraki(API_KEY)
 
 # Get organizations
@@ -91,7 +111,7 @@ for org in organizations:
                             }
                         )
 
-            if len(actions) < 99:
+            if len(actions) < 100:
                 try:
                     logging.info(f"Executing Action Batch")
                     response = dashboard.organizations.createOrganizationActionBatch(
