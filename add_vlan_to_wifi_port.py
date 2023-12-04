@@ -84,7 +84,7 @@ for org in organizations:
 
         # Only interested in the Switch devices
         switches = [d for d in devices if d['model'].startswith('MS')]
-        switches = [s for s in switches if 'C-SW-ACC-01' in s['name']]
+        switches = [s for s in switches if 'C-SW' in s['name']]
 
         for switch in switches:
             try:

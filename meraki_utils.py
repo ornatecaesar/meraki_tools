@@ -8,7 +8,8 @@ def connect_to_meraki(api_key, print_console=False):
         api_key=api_key,
         base_url='https://api.meraki.com/api/v1',
         print_console=False,
-        output_log=False,
+        output_log=True,
+        inherit_logging_config=True,
         log_file_prefix=f'{__file__}'
     )
     return dashboard
