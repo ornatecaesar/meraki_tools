@@ -32,6 +32,10 @@ def is_vlan_in_list(vlan, vlan_list_string):
     :param vlan_list_string: The list
     :return: Boolean
     """
+    # Check if all VLANs are allowed
+    if 'all' in vlan_list_string.lower():
+        return True
+
     vlan_list = vlan_list_string.split(',')
 
     for item in vlan_list:
@@ -45,6 +49,7 @@ def is_vlan_in_list(vlan, vlan_list_string):
 
     return False
 
+# Create dashboard session
 dashboard = connect_to_meraki(API_KEY)
 
 # Get organizations
@@ -78,7 +83,7 @@ for org in organizations:
 
         # Only interested in the Switch devices
         switches = [d for d in devices if d['model'].startswith('MS')]
-        switches = [s for s in switches if 'CORE-02' in s['name']]
+        switches = [s for s in switches if 'J-SW-' in s['name']]
 
         for switch in switches:
             try:
@@ -93,9 +98,9 @@ for org in organizations:
                 # If the port is a trunk, and it's native VLAN is 16 (trunk to AP)
                 # or the port has a native vlan of 1001 and also allows vlan 16 tagged (switch trunk)
                 if (port['type'] == 'trunk' and (
-                        port['vlan'] == 16 or (port['vlan'] == 1001 and '16' in port['allowedVlans'].split(',')))):
+                        port['vlan'] == 16 or (port['vlan'] == 1001 and is_vlan_in_list(16, port['allowedVlans'])))):
                     # Add the port to the action batch if the action batch is less than 100, the API limit
-                    if len(actions) < 100:
+                    if len(actions) < 20:
                         logging.info(f"Adding port {port['portId']} on switch {switch['name']} to action batch.")
                         # Get currently allowed VLANs on the port
                         allowed_vlans = port['allowedVlans']
@@ -111,7 +116,7 @@ for org in organizations:
                             }
                         )
 
-            if len(actions) < 100:
+            if len(actions) < 20:
                 try:
                     logging.info(f"Executing Action Batch")
                     response = dashboard.organizations.createOrganizationActionBatch(
