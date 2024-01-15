@@ -84,7 +84,7 @@ for org in organizations:
 
         # Only interested in the Switch devices
         switches = [d for d in devices if d['model'].startswith('MS')]
-        switches = [s for s in switches if 'J-SW-' in s['name']]
+        switches = [s for s in switches if 'C-SW-ACC-01' in s['name']]
 
         for switch in switches:
             try:
@@ -94,19 +94,18 @@ for org in organizations:
             except Exception as e:
                 other_error(e)
 
-            # For each port, check if it is a Trunk and has native VLAN 16
+
             for port in switch_ports:
-                # If the port is a trunk, and it's native VLAN is 16 (trunk to AP)
-                # or the port has a native vlan of 1001 and also allows vlan 16 tagged (switch trunk)
+
                 if (port['type'] == 'trunk' and (
                         (port['vlan'] == 16 and 'all' not in port['allowedVlans']) or
                         (port['vlan'] == 1001 and is_vlan_in_list(16, port['allowedVlans']) == True))):
-                    # Add the port to the action batch if the action batch is less than 100, the API limit
-                    if len(actions) < 20:
+
+                    if len(actions) < 19:
                         logging.info(f"Adding port {port['portId']} on switch {switch['name']} to action batch.")
-                        # Get currently allowed VLANs on the port
+
                         allowed_vlans = port['allowedVlans']
-                        # Add new VLAN to the allowed VLANs
+
                         allowed_vlans += f",{vlan_to_add}"
                         actions.append(
                             {
@@ -118,18 +117,20 @@ for org in organizations:
                             }
                         )
 
-            if len(actions) < 20:
-                try:
-                    logging.info(f"Executing Action Batch")
-                    response = dashboard.organizations.createOrganizationActionBatch(
-                        organizationId=org['id'],
-                        actions=actions,
-                        confirmed=True,
-                        synchronous=True
-                    )
-                except meraki.APIError as e:
-                    logging.error(f"Unable to execute action batch: {e}")
+                    else:
+                        try:
+                            logging.info(f"Executing Action Batch")
+                            response = dashboard.organizations.createOrganizationActionBatch(
+                                organizationId=org['id'],
+                                actions=actions,
+                                confirmed=True,
+                                synchronous=True
+                            )
+                            logging.info(f"Completed processing Action Batch.")
+                            actions = []
+                        except meraki.APIError as e:
+                            logging.error(f"Unable to execute action batch: {e}")
 
-                actions = []
 
-        logging.info(f"Completed processing Action Batch.")
+
+
