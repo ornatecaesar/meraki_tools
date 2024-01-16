@@ -8,6 +8,8 @@ import meraki
 import os
 import json
 
+import pandas as pd
+
 from meraki_utils import connect_to_meraki, meraki_error, other_error
 
 API_KEY = os.getenv('MERAKI_API_KEY')
@@ -15,7 +17,7 @@ API_KEY = os.getenv('MERAKI_API_KEY')
 # Connect to Meraki dashboard
 dashboard = connect_to_meraki(API_KEY)
 
-subnets = {}
+interface_info_df = pd.DataFrame(columns=['name', 'subnet', 'interfaceIp', 'defaultGateway', 'vlanId', 'switch'])
 
 # Attempt to obtain organizations
 try:
@@ -38,8 +40,17 @@ for org in organizations:
     # Drop networks that don't contain switches
     networks = [n for n in networks if 'switch' in n['productTypes']]
 
-    # For each network get all the Meraki devices
+    # For each network
+    # Get all stacks on the network
     for net in networks:
+        try:
+            stacks = dashboard.switch.getNetworkSwitchStacks(networkId=net['id'])
+        except meraki.APIError as e:
+            meraki_error(e)
+        except Exception as e:
+            other_error(e)
+
+        # Get all devices on the network
         try:
             devices = dashboard.networks.getNetworkDevices(networkId=net['id'])
         except meraki.APIError as e:
@@ -47,21 +58,34 @@ for org in organizations:
         except Exception as e:
             other_error(e)
 
+        # Discard all non-switch devices
+        devices = [d for d in devices if d['model'].startswith('MS')]
 
-        # Discard all devices other than switches
-        devices = [d for d in devices if 'MS' in d['model']]
+        # Get set of all serial numbers of switches that are members of stacks
+        stack_serials = {serial for stack in stacks for serial in stack['serials']}
 
-        # For each switch get the routing interface
+        # Check if the serial number of a switch is a stack member. If not, get the L3 interface info
         for device in devices:
-            device_subnet = {}
-            try:
-                current_subnet = dashboard.switch.getDeviceSwitchRoutingInterfaces(serial=device['serial'])
-            except meraki.APIError as e:
-                meraki_error(e)
-            except Exception as e:
-               other_error(e)
+            if device['serial'] not in stack_serials:
+                l3_interface_info = dashboard.switch.getDeviceSwitchRoutingInterfaces(serial=device['serial'])
+                for l3_interface in l3_interface_info:
+                    interface_info_df = interface_info_df._append({
+                        'name': l3_interface['name'],
+                        'subnet': l3_interface['subnet'],
+                        'interfaceIp': l3_interface['interfaceIp'],
+                        'defaultGateway': l3_interface['defaultGateway'],
+                        'vlanId': l3_interface['vlanId'],
+                        'switch': device['name']
+                    }, ignore_index=True)
 
-            # Append list of interfaces to subnet dictionary
-            subnets[device['name']] = current_subnet
-
-print(subnets)
+        for stack in stacks:
+            l3_interface_info = dashboard.switch.createNetworkSwitchStackRoutingInterface(networkId=net['id'], stackId=stack['id'])
+            for l3_interface in l3_interface_info:
+                interface_info_df = interface_info_df._append({
+                    'name': l3_interface['name'],
+                    'subnet': l3_interface['subnet'],
+                    'interfaceIp': l3_interface['interfaceIp'],
+                    'defaultGateway': l3_interface['defaultGateway'],
+                    'vlanId': l3_interface['vlanId'],
+                    'switch': stack['name']
+                })
