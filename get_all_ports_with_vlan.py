@@ -55,7 +55,7 @@ def is_vlan_in_list(vlan, vlan_list_string):
 
     return False
 
-vlan_to_find = 2000
+vlan_to_find = 38
 
 dashboard = connect_to_meraki(API_KEY)
 
@@ -102,15 +102,25 @@ for org in organizations:
 
 
             for port in switch_ports:
-                if ((port['vlan'] == vlan_to_find and 'all' not in port['allowedVlans']) or
-                        (port['vlan'] == 1001 and is_vlan_in_list(vlan_to_find, port['allowedVlans']) == True)):
+                if port['type'] == 'trunk':
+                    # If the current port is a trunk, look for VLAN number in multiple attributes of the port
+                    if ((port['vlan'] == vlan_to_find and 'all' not in port['allowedVlans']) or
+                            (port['vlan'] == 1001 and is_vlan_in_list(vlan_to_find, port['allowedVlans']) == True)):
 
-                    # Add switch port details to dataframe
-                    df_switch_details = df_switch_details._append({
-                        'Switch Name': switch['name'],
-                        'Port Number': port['portId'],
-                        'Port Type': port['type']
-                    }, ignore_index=True)
+                        # Add switch port details to dataframe
+                        df_switch_details = df_switch_details._append({
+                            'Switch Name': switch['name'],
+                            'Port Number': port['portId'],
+                            'Port Type': port['type']
+                        }, ignore_index=True)
+                elif port['type'] == 'access':
+                    # If the current port is an access port, check if the 'vlan' attribute mathces the vlan_to_find
+                    if port['vlan'] == vlan_to_find:
+                        df_switch_details = df_switch_details._append({
+                            'Switch Name': switch['name'],
+                            'Port Number': port['portId'],
+                            'Port Type': port['type']
+                        }, ignore_index=True)
 
 print(df_switch_details)
 
