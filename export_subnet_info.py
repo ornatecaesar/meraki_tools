@@ -17,7 +17,7 @@ API_KEY = os.getenv('MERAKI_API_KEY')
 # Connect to Meraki dashboard
 dashboard = connect_to_meraki(API_KEY)
 
-interface_info_df = pd.DataFrame(columns=['name', 'subnet', 'interfaceIp', 'defaultGateway', 'vlanId', 'switch'])
+interface_info_df = pd.DataFrame(columns=['name', 'subnet', 'interfaceIp', 'vlanId', 'switch'])
 
 # Attempt to obtain organizations
 try:
@@ -73,19 +73,19 @@ for org in organizations:
                         'name': l3_interface['name'],
                         'subnet': l3_interface['subnet'],
                         'interfaceIp': l3_interface['interfaceIp'],
-                        'defaultGateway': l3_interface['defaultGateway'],
                         'vlanId': l3_interface['vlanId'],
                         'switch': device['name']
                     }, ignore_index=True)
 
         for stack in stacks:
-            l3_interface_info = dashboard.switch.createNetworkSwitchStackRoutingInterface(networkId=net['id'], stackId=stack['id'])
+            l3_interface_info = dashboard.switch.getNetworkSwitchStackRoutingInterfaces(networkId=net['id'], switchStackId=stack['id'])
             for l3_interface in l3_interface_info:
                 interface_info_df = interface_info_df._append({
                     'name': l3_interface['name'],
                     'subnet': l3_interface['subnet'],
                     'interfaceIp': l3_interface['interfaceIp'],
-                    'defaultGateway': l3_interface['defaultGateway'],
                     'vlanId': l3_interface['vlanId'],
                     'switch': stack['name']
-                })
+                }, ignore_index=True)
+
+print(interface_info_df)
