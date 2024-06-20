@@ -55,9 +55,13 @@ def is_vlan_in_list(vlan, vlan_list_string):
 
     return False
 
-vlan_to_find = 38
+vlan_to_find = 1003
 
-dashboard = connect_to_meraki(API_KEY)
+dashboard = meraki.DashboardAPI(api_key=API_KEY,
+                                print_console=False,
+                                output_log=True,
+                                inherit_logging_config=True,
+                                log_file_prefix=f'{__file__}')
 
 # Get organizations
 try:
