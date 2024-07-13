@@ -17,7 +17,7 @@ script_name = os.path.splitext(script_name)[0]
 log_file_name = f"{script_name}.log"
 logging.basicConfig(filename=f'logs/{log_file_name}',
                     level=logging.WARNING,
-                    format='%(asctime)s %(levelname)s %(message)s',
+                    format='%(asctime)s - %(levelname)s - %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.WARNING)
 logging.getLogger('meraki').setLevel(logging.WARNING)
