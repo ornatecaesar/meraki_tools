@@ -55,7 +55,7 @@ def is_vlan_in_list(vlan, vlan_list_string):
 
     return False
 
-vlan_to_find = 1003
+vlan_to_find = 20
 
 dashboard = meraki.DashboardAPI(api_key=API_KEY,
                                 print_console=False,
@@ -82,7 +82,7 @@ for org in organizations:
         other_error(e)
 
     # Only retain networks that contain switches
-    networks = [n for n in networks if 'switch' in n['productTypes'] and 'college' in n['name'].lower()]
+    networks = [n for n in networks if 'switch' in n['productTypes'] and 'junior' in n['name'].lower()]
 
     # Get all the devices on each network
     for network in networks:
