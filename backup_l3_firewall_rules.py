@@ -48,8 +48,20 @@ except Exception as e:
 networks = [n for n in networks if 'Junior' in n['name']]
 
 # Get firewall rules
-rules = dashboard.appliance.getNetworkApplianceFirewallL3FirewallRules(networkId=networks[0]['id'])
-policy_objects = dashboard.organizations.getOrganizationPolicyObjects(organizationId=organizations[0]['id'])
+try:
+    rules = dashboard.appliance.getNetworkApplianceFirewallL3FirewallRules(networkId=networks[0]['id'])
+except meraki.APIError as e:
+    logging.error(f"API error occured: {e}")
+except Exception as e:
+    logging.error(f"Unexpected error occured: {e}")
+
+# Get policy objects
+try:
+    policy_objects = dashboard.organizations.getOrganizationPolicyObjects(organizationId=organizations[0]['id'])
+except meraki.APIError as e:
+    logging.error(f"API error occured: {e}")
+except Exception as e:
+    logging.error(f"Unexpected error occured: {e}")
 
 # Export firewall rules to JSON
 backup_dir = Path('backup_json/l3_firewall_rules/')

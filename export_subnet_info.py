@@ -12,12 +12,16 @@ import pandas as pd
 
 from meraki_utils import connect_to_meraki, meraki_error, other_error
 
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_colwidth', None)
+
 API_KEY = os.getenv('MERAKI_API_KEY')
 
 # Connect to Meraki dashboard
-dashboard = connect_to_meraki(API_KEY)
+dashboard = connect_to_meraki(api_key=os.environ.get('MERAKI_API_KEY'),
+                              print_console=False)
 
-interface_info_df = pd.DataFrame(columns=['name', 'subnet', 'interfaceIp', 'vlanId', 'switch'])
+interface_info_df = pd.DataFrame(columns=['name', 'subnet', 'interfaceIp', 'vlanId', 'switch', 'network'])
 
 # Attempt to obtain organizations
 try:
@@ -74,7 +78,8 @@ for org in organizations:
                         'subnet': l3_interface['subnet'],
                         'interfaceIp': l3_interface['interfaceIp'],
                         'vlanId': l3_interface['vlanId'],
-                        'switch': device['name']
+                        'switch': device['name'],
+                        'network': net['name']
                     }, ignore_index=True)
 
         for stack in stacks:
@@ -85,7 +90,8 @@ for org in organizations:
                     'subnet': l3_interface['subnet'],
                     'interfaceIp': l3_interface['interfaceIp'],
                     'vlanId': l3_interface['vlanId'],
-                    'switch': stack['name']
+                    'switch': stack['name'],
+                    'network': net['name']
                 }, ignore_index=True)
 
 print(interface_info_df)
