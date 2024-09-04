@@ -3,6 +3,7 @@
 """
 Exports all info regarding switch subnets and interfaces to a json file
 """
+import pathlib
 
 import meraki
 import os
@@ -94,4 +95,10 @@ for org in organizations:
                     'network': net['name']
                 }, ignore_index=True)
 
-print(interface_info_df)
+
+# Ensure directory exists
+export_dir = pathlib.Path('csv_exports')
+export_dir.mkdir(parents=True, exist_ok=True)
+
+# Export dataframe to csv
+interface_info_df.to_csv(export_dir / 'interface_info_df.csv', header=True, index=False)
