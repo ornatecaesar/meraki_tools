@@ -1,0 +1,160 @@
+2024-06-10 10:41:47 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-06-10 10:41:47 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-06-10 10:41:47 INFO GET https://api.meraki.com/api/v1/organizations
+2024-06-10 10:41:48 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-06-10 10:41:48 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-06-10 10:41:48 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-06-10 10:41:48 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-06-10 10:41:48 DEBUG {'tags': ['networks', 'configure', 'devices'], 'operation': 'getNetworkDevices', 'method': 'GET', 'url': '/networks/L_631066897785292883/devices', 'params': None}
+2024-06-10 10:41:48 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/devices
+2024-06-10 10:41:51 INFO networks, getNetworkDevices - 200 OK
+2024-06-10 10:41:51 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-BXUF-EJT2/switch/ports', 'params': None}
+2024-06-10 10:41:51 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-BXUF-EJT2/switch/ports
+2024-06-10 10:41:52 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:41:52 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-G6NC-7BM3/switch/ports', 'params': None}
+2024-06-10 10:41:52 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-G6NC-7BM3/switch/ports
+2024-06-10 10:41:53 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:41:53 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-FZH7-6QB2/switch/ports', 'params': None}
+2024-06-10 10:41:53 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-FZH7-6QB2/switch/ports
+2024-06-10 10:41:54 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:41:54 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2CX-TQ7N-8ZUS/switch/ports', 'params': None}
+2024-06-10 10:41:54 INFO GET https://api.meraki.com/api/v1/devices/Q2CX-TQ7N-8ZUS/switch/ports
+2024-06-10 10:41:55 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:41:55 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-7BEQ-8Z8E/switch/ports', 'params': None}
+2024-06-10 10:41:55 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-7BEQ-8Z8E/switch/ports
+2024-06-10 10:41:56 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:41:56 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-5D5Q-F5RF/switch/ports', 'params': None}
+2024-06-10 10:41:56 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-5D5Q-F5RF/switch/ports
+2024-06-10 10:41:57 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:41:57 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2CX-U4J8-W8JH/switch/ports', 'params': None}
+2024-06-10 10:41:57 INFO GET https://api.meraki.com/api/v1/devices/Q2CX-U4J8-W8JH/switch/ports
+2024-06-10 10:41:58 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:41:58 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-53V4-LMTZ/switch/ports', 'params': None}
+2024-06-10 10:41:58 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-53V4-LMTZ/switch/ports
+2024-06-10 10:42:00 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:00 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-G2PN-KGWT/switch/ports', 'params': None}
+2024-06-10 10:42:00 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-G2PN-KGWT/switch/ports
+2024-06-10 10:42:01 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:01 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-5BTM-Y5X6/switch/ports', 'params': None}
+2024-06-10 10:42:01 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-5BTM-Y5X6/switch/ports
+2024-06-10 10:42:02 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:02 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-FXC2-SNXZ/switch/ports', 'params': None}
+2024-06-10 10:42:02 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-FXC2-SNXZ/switch/ports
+2024-06-10 10:42:03 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:03 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-7P6V-94SR/switch/ports', 'params': None}
+2024-06-10 10:42:03 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-7P6V-94SR/switch/ports
+2024-06-10 10:42:04 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:04 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2CX-U9WN-UPNF/switch/ports', 'params': None}
+2024-06-10 10:42:04 INFO GET https://api.meraki.com/api/v1/devices/Q2CX-U9WN-UPNF/switch/ports
+2024-06-10 10:42:05 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:05 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-G8AL-S3RT/switch/ports', 'params': None}
+2024-06-10 10:42:05 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-G8AL-S3RT/switch/ports
+2024-06-10 10:42:06 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:06 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-M2ED-VEL8/switch/ports', 'params': None}
+2024-06-10 10:42:06 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-M2ED-VEL8/switch/ports
+2024-06-10 10:42:08 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:08 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2DW-SNE3-UQL2/switch/ports', 'params': None}
+2024-06-10 10:42:08 INFO GET https://api.meraki.com/api/v1/devices/Q2DW-SNE3-UQL2/switch/ports
+2024-06-10 10:42:09 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:09 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-5EXJ-5EUS/switch/ports', 'params': None}
+2024-06-10 10:42:09 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-5EXJ-5EUS/switch/ports
+2024-06-10 10:42:10 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:10 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-BZ9G-PETD/switch/ports', 'params': None}
+2024-06-10 10:42:10 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-BZ9G-PETD/switch/ports
+2024-06-10 10:42:11 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:11 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-BZ6A-FMK7/switch/ports', 'params': None}
+2024-06-10 10:42:11 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-BZ6A-FMK7/switch/ports
+2024-06-10 10:42:12 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:12 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-7MAB-JUZ6/switch/ports', 'params': None}
+2024-06-10 10:42:12 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-7MAB-JUZ6/switch/ports
+2024-06-10 10:42:14 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:14 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-59UQ-RQS4/switch/ports', 'params': None}
+2024-06-10 10:42:14 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-59UQ-RQS4/switch/ports
+2024-06-10 10:42:15 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:15 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-G4L5-3BX2/switch/ports', 'params': None}
+2024-06-10 10:42:15 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-G4L5-3BX2/switch/ports
+2024-06-10 10:42:16 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:16 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-3NFY-AFWS/switch/ports', 'params': None}
+2024-06-10 10:42:16 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-3NFY-AFWS/switch/ports
+2024-06-10 10:42:18 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:18 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-7NWE-2XT9/switch/ports', 'params': None}
+2024-06-10 10:42:18 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-7NWE-2XT9/switch/ports
+2024-06-10 10:42:19 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:19 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-BY67-NBWW/switch/ports', 'params': None}
+2024-06-10 10:42:19 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-BY67-NBWW/switch/ports
+2024-06-10 10:42:21 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:21 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2DW-DLX2-7JQW/switch/ports', 'params': None}
+2024-06-10 10:42:21 INFO GET https://api.meraki.com/api/v1/devices/Q2DW-DLX2-7JQW/switch/ports
+2024-06-10 10:42:22 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:22 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2DY-5ELR-EH7M/switch/ports', 'params': None}
+2024-06-10 10:42:22 INFO GET https://api.meraki.com/api/v1/devices/Q2DY-5ELR-EH7M/switch/ports
+2024-06-10 10:42:23 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:23 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-LWHR-KBMX/switch/ports', 'params': None}
+2024-06-10 10:42:23 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-LWHR-KBMX/switch/ports
+2024-06-10 10:42:24 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:24 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-7C79-BLFR/switch/ports', 'params': None}
+2024-06-10 10:42:24 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-7C79-BLFR/switch/ports
+2024-06-10 10:42:26 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:26 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-7EY5-Y9C4/switch/ports', 'params': None}
+2024-06-10 10:42:26 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-7EY5-Y9C4/switch/ports
+2024-06-10 10:42:27 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:27 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-BY5U-ECCU/switch/ports', 'params': None}
+2024-06-10 10:42:27 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-BY5U-ECCU/switch/ports
+2024-06-10 10:42:28 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:28 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2DY-T9U2-TX8Z/switch/ports', 'params': None}
+2024-06-10 10:42:28 INFO GET https://api.meraki.com/api/v1/devices/Q2DY-T9U2-TX8Z/switch/ports
+2024-06-10 10:42:30 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:30 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2CX-UKPE-DABY/switch/ports', 'params': None}
+2024-06-10 10:42:30 INFO GET https://api.meraki.com/api/v1/devices/Q2CX-UKPE-DABY/switch/ports
+2024-06-10 10:42:30 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:30 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-BZ49-4DHX/switch/ports', 'params': None}
+2024-06-10 10:42:30 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-BZ49-4DHX/switch/ports
+2024-06-10 10:42:32 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:32 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-LYSU-8TKC/switch/ports', 'params': None}
+2024-06-10 10:42:32 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-LYSU-8TKC/switch/ports
+2024-06-10 10:42:33 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:33 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-BXZP-XX8V/switch/ports', 'params': None}
+2024-06-10 10:42:33 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-BXZP-XX8V/switch/ports
+2024-06-10 10:42:34 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:34 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-BU43-FEPQ/switch/ports', 'params': None}
+2024-06-10 10:42:34 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-BU43-FEPQ/switch/ports
+2024-06-10 10:42:36 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:36 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-7LXW-A8YU/switch/ports', 'params': None}
+2024-06-10 10:42:36 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-7LXW-A8YU/switch/ports
+2024-06-10 10:42:37 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:37 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-7C8S-DQ5Y/switch/ports', 'params': None}
+2024-06-10 10:42:37 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-7C8S-DQ5Y/switch/ports
+2024-06-10 10:42:38 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:38 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2CX-U94A-M88L/switch/ports', 'params': None}
+2024-06-10 10:42:38 INFO GET https://api.meraki.com/api/v1/devices/Q2CX-U94A-M88L/switch/ports
+2024-06-10 10:42:39 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:39 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-BRUD-2NS4/switch/ports', 'params': None}
+2024-06-10 10:42:39 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-BRUD-2NS4/switch/ports
+2024-06-10 10:42:41 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:41 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-G3NX-VMHZ/switch/ports', 'params': None}
+2024-06-10 10:42:41 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-G3NX-VMHZ/switch/ports
+2024-06-10 10:42:42 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:42 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-FYYL-4S2R/switch/ports', 'params': None}
+2024-06-10 10:42:42 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-FYYL-4S2R/switch/ports
+2024-06-10 10:42:43 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:43 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-LXX5-V9YH/switch/ports', 'params': None}
+2024-06-10 10:42:43 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-LXX5-V9YH/switch/ports
+2024-06-10 10:42:44 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:44 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2CX-UKHY-23A6/switch/ports', 'params': None}
+2024-06-10 10:42:44 INFO GET https://api.meraki.com/api/v1/devices/Q2CX-UKHY-23A6/switch/ports
+2024-06-10 10:42:45 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:45 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-G8ZX-L8CK/switch/ports', 'params': None}
+2024-06-10 10:42:45 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-G8ZX-L8CK/switch/ports
+2024-06-10 10:42:46 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:46 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-G537-TKZX/switch/ports', 'params': None}
+2024-06-10 10:42:46 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-G537-TKZX/switch/ports
+2024-06-10 10:42:47 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:47 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-5DPY-C49L/switch/ports', 'params': None}
+2024-06-10 10:42:47 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-5DPY-C49L/switch/ports
+2024-06-10 10:42:48 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:48 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2EW-LZGN-APRW/switch/ports', 'params': None}
+2024-06-10 10:42:48 INFO GET https://api.meraki.com/api/v1/devices/Q2EW-LZGN-APRW/switch/ports
+2024-06-10 10:42:50 INFO switch, getDeviceSwitchPorts - 200 OK
+2024-06-10 10:42:50 DEBUG {'tags': ['switch', 'configure', 'ports'], 'operation': 'getDeviceSwitchPorts', 'method': 'GET', 'url': '/devices/Q2ZP-7MPX-MTWL/switch/ports', 'params': None}
+2024-06-10 10:42:50 INFO GET https://api.meraki.com/api/v1/devices/Q2ZP-7MPX-MTWL/switch/ports
+2024-06-10 10:42:51 INFO switch, getDeviceSwitchPorts - 200 OK

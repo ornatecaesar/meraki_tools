@@ -1,0 +1,595 @@
+2024-05-22 15:43:25 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-22 15:43:25 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-22 15:43:25 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-22 15:43:26 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 08:03:34 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 08:03:34 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 08:03:34 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 08:03:34 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 11:33:29 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 11:33:29 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 11:33:29 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 11:33:30 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 11:33:50 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 11:33:50 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 11:33:50 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 11:33:50 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 11:33:50 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 11:33:50 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 11:33:51 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 12:26:31 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 12:26:31 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 12:26:31 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 12:26:32 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 12:26:32 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 12:26:32 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 12:26:32 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 12:26:32 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 12:26:32 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 12:26:32 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:32 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/ssids', 'params': None}
+2024-05-23 12:26:32 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/ssids
+2024-05-23 12:26:33 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:33 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689969/wireless/ssids', 'params': None}
+2024-05-23 12:26:33 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689969/wireless/ssids
+2024-05-23 12:26:33 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:33 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689980/wireless/ssids', 'params': None}
+2024-05-23 12:26:33 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689980/wireless/ssids
+2024-05-23 12:26:33 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:33 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926690003/wireless/ssids', 'params': None}
+2024-05-23 12:26:33 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926690003/wireless/ssids
+2024-05-23 12:26:34 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:34 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691120/wireless/ssids', 'params': None}
+2024-05-23 12:26:34 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691120/wireless/ssids
+2024-05-23 12:26:35 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:35 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691722/wireless/ssids', 'params': None}
+2024-05-23 12:26:35 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691722/wireless/ssids
+2024-05-23 12:26:36 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:36 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693045/wireless/ssids', 'params': None}
+2024-05-23 12:26:36 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693045/wireless/ssids
+2024-05-23 12:26:36 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:36 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693046/wireless/ssids', 'params': None}
+2024-05-23 12:26:36 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693046/wireless/ssids
+2024-05-23 12:26:37 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:37 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926690375/wireless/ssids', 'params': None}
+2024-05-23 12:26:37 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926690375/wireless/ssids
+2024-05-23 12:26:37 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:37 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691502/wireless/ssids', 'params': None}
+2024-05-23 12:26:37 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691502/wireless/ssids
+2024-05-23 12:26:38 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:38 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691642/wireless/ssids', 'params': None}
+2024-05-23 12:26:38 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691642/wireless/ssids
+2024-05-23 12:26:38 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:38 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691844/wireless/ssids', 'params': None}
+2024-05-23 12:26:38 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691844/wireless/ssids
+2024-05-23 12:26:39 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:39 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691949/wireless/ssids', 'params': None}
+2024-05-23 12:26:39 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691949/wireless/ssids
+2024-05-23 12:26:39 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:39 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691957/wireless/ssids', 'params': None}
+2024-05-23 12:26:39 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691957/wireless/ssids
+2024-05-23 12:26:39 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:39 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691958/wireless/ssids', 'params': None}
+2024-05-23 12:26:39 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691958/wireless/ssids
+2024-05-23 12:26:40 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:40 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926696615/wireless/ssids', 'params': None}
+2024-05-23 12:26:40 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926696615/wireless/ssids
+2024-05-23 12:26:40 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:40 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702105/wireless/ssids', 'params': None}
+2024-05-23 12:26:40 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702105/wireless/ssids
+2024-05-23 12:26:40 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:40 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702106/wireless/ssids', 'params': None}
+2024-05-23 12:26:40 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702106/wireless/ssids
+2024-05-23 12:26:41 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:41 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702109/wireless/ssids', 'params': None}
+2024-05-23 12:26:41 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702109/wireless/ssids
+2024-05-23 12:26:41 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:26:41 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926712247/wireless/ssids', 'params': None}
+2024-05-23 12:26:41 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926712247/wireless/ssids
+2024-05-23 12:26:41 ERROR wireless, getNetworkWirelessSsids - 400 Bad Request, {'errors': ['This endpoint only supports wireless networks']}
+2024-05-23 12:27:51 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 12:27:51 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 12:27:51 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 12:27:51 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 12:27:51 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 12:27:51 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 12:27:51 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 12:28:30 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 12:28:30 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 12:28:30 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 12:28:31 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 12:28:31 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 12:28:31 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 12:28:31 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 12:28:44 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 12:28:44 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 12:28:44 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 12:28:45 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 12:28:45 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 12:28:45 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 12:28:45 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 12:59:26 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 12:59:26 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 12:59:26 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 12:59:27 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 12:59:27 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 12:59:27 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 12:59:27 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 12:59:27 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 12:59:27 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 12:59:27 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:53 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 12:59:53 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 12:59:53 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 12:59:54 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 12:59:54 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 12:59:54 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 12:59:55 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 12:59:55 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 12:59:55 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 12:59:55 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:55 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/ssids', 'params': None}
+2024-05-23 12:59:55 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/ssids
+2024-05-23 12:59:55 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:55 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689969/wireless/ssids', 'params': None}
+2024-05-23 12:59:55 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689969/wireless/ssids
+2024-05-23 12:59:56 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:56 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689980/wireless/ssids', 'params': None}
+2024-05-23 12:59:56 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689980/wireless/ssids
+2024-05-23 12:59:56 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:56 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926690003/wireless/ssids', 'params': None}
+2024-05-23 12:59:56 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926690003/wireless/ssids
+2024-05-23 12:59:57 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:57 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691120/wireless/ssids', 'params': None}
+2024-05-23 12:59:57 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691120/wireless/ssids
+2024-05-23 12:59:57 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:57 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691722/wireless/ssids', 'params': None}
+2024-05-23 12:59:57 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691722/wireless/ssids
+2024-05-23 12:59:57 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:57 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693045/wireless/ssids', 'params': None}
+2024-05-23 12:59:57 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693045/wireless/ssids
+2024-05-23 12:59:58 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:58 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693046/wireless/ssids', 'params': None}
+2024-05-23 12:59:58 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693046/wireless/ssids
+2024-05-23 12:59:58 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:58 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926690375/wireless/ssids', 'params': None}
+2024-05-23 12:59:58 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926690375/wireless/ssids
+2024-05-23 12:59:58 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:58 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691502/wireless/ssids', 'params': None}
+2024-05-23 12:59:58 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691502/wireless/ssids
+2024-05-23 12:59:59 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:59 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691642/wireless/ssids', 'params': None}
+2024-05-23 12:59:59 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691642/wireless/ssids
+2024-05-23 12:59:59 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:59 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691844/wireless/ssids', 'params': None}
+2024-05-23 12:59:59 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691844/wireless/ssids
+2024-05-23 12:59:59 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:59 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691949/wireless/ssids', 'params': None}
+2024-05-23 12:59:59 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691949/wireless/ssids
+2024-05-23 12:59:59 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 12:59:59 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691957/wireless/ssids', 'params': None}
+2024-05-23 12:59:59 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691957/wireless/ssids
+2024-05-23 13:00:00 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:00:00 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691958/wireless/ssids', 'params': None}
+2024-05-23 13:00:00 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691958/wireless/ssids
+2024-05-23 13:00:00 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:00:00 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926696615/wireless/ssids', 'params': None}
+2024-05-23 13:00:00 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926696615/wireless/ssids
+2024-05-23 13:00:01 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:00:01 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702105/wireless/ssids', 'params': None}
+2024-05-23 13:00:01 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702105/wireless/ssids
+2024-05-23 13:00:01 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:00:01 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702106/wireless/ssids', 'params': None}
+2024-05-23 13:00:01 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702106/wireless/ssids
+2024-05-23 13:00:01 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:00:01 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702109/wireless/ssids', 'params': None}
+2024-05-23 13:00:01 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702109/wireless/ssids
+2024-05-23 13:00:02 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:00:02 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926712392/wireless/ssids', 'params': None}
+2024-05-23 13:00:02 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926712392/wireless/ssids
+2024-05-23 13:00:02 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:00:22 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 13:00:22 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 13:00:22 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 13:00:22 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 13:00:22 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 13:00:22 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 13:00:22 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 13:01:12 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 13:01:12 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 13:01:12 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:09:02 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/ssids', 'params': None}
+2024-05-23 13:09:02 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/ssids
+2024-05-23 13:09:03 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:09:28 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689969/wireless/ssids', 'params': None}
+2024-05-23 13:09:28 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689969/wireless/ssids
+2024-05-23 13:09:28 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:29 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 13:10:29 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 13:10:29 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 13:10:30 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 13:10:30 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 13:10:30 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 13:10:30 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 13:10:30 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 13:10:30 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 13:10:30 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:30 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/ssids', 'params': None}
+2024-05-23 13:10:30 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/ssids
+2024-05-23 13:10:31 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:31 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689969/wireless/ssids', 'params': None}
+2024-05-23 13:10:31 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689969/wireless/ssids
+2024-05-23 13:10:31 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:31 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689980/wireless/ssids', 'params': None}
+2024-05-23 13:10:31 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689980/wireless/ssids
+2024-05-23 13:10:32 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:32 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926690003/wireless/ssids', 'params': None}
+2024-05-23 13:10:32 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926690003/wireless/ssids
+2024-05-23 13:10:32 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:32 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691120/wireless/ssids', 'params': None}
+2024-05-23 13:10:32 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691120/wireless/ssids
+2024-05-23 13:10:32 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:32 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691722/wireless/ssids', 'params': None}
+2024-05-23 13:10:32 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691722/wireless/ssids
+2024-05-23 13:10:33 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:33 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693045/wireless/ssids', 'params': None}
+2024-05-23 13:10:33 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693045/wireless/ssids
+2024-05-23 13:10:33 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:33 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693046/wireless/ssids', 'params': None}
+2024-05-23 13:10:33 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693046/wireless/ssids
+2024-05-23 13:10:34 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:34 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926690375/wireless/ssids', 'params': None}
+2024-05-23 13:10:34 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926690375/wireless/ssids
+2024-05-23 13:10:34 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:34 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691502/wireless/ssids', 'params': None}
+2024-05-23 13:10:34 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691502/wireless/ssids
+2024-05-23 13:10:34 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:34 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691642/wireless/ssids', 'params': None}
+2024-05-23 13:10:34 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691642/wireless/ssids
+2024-05-23 13:10:35 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:35 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691844/wireless/ssids', 'params': None}
+2024-05-23 13:10:35 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691844/wireless/ssids
+2024-05-23 13:10:35 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:35 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691949/wireless/ssids', 'params': None}
+2024-05-23 13:10:35 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691949/wireless/ssids
+2024-05-23 13:10:35 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:35 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691957/wireless/ssids', 'params': None}
+2024-05-23 13:10:35 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691957/wireless/ssids
+2024-05-23 13:10:36 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:36 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691958/wireless/ssids', 'params': None}
+2024-05-23 13:10:36 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691958/wireless/ssids
+2024-05-23 13:10:36 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:36 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926696615/wireless/ssids', 'params': None}
+2024-05-23 13:10:36 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926696615/wireless/ssids
+2024-05-23 13:10:36 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:36 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702105/wireless/ssids', 'params': None}
+2024-05-23 13:10:36 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702105/wireless/ssids
+2024-05-23 13:10:37 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:37 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702106/wireless/ssids', 'params': None}
+2024-05-23 13:10:37 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702106/wireless/ssids
+2024-05-23 13:10:37 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:37 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702109/wireless/ssids', 'params': None}
+2024-05-23 13:10:37 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702109/wireless/ssids
+2024-05-23 13:10:37 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:10:37 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926712392/wireless/ssids', 'params': None}
+2024-05-23 13:10:37 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926712392/wireless/ssids
+2024-05-23 13:10:38 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:11:09 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 13:11:09 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 13:11:09 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 13:11:10 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 13:11:10 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 13:11:10 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 13:11:10 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 13:11:12 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 13:11:12 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 13:11:12 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:29 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 13:20:29 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 13:20:29 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 13:20:29 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 13:20:29 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 13:20:29 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 13:20:30 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 13:20:30 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 13:20:30 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 13:20:30 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:30 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/ssids', 'params': None}
+2024-05-23 13:20:30 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/ssids
+2024-05-23 13:20:30 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:30 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689969/wireless/ssids', 'params': None}
+2024-05-23 13:20:30 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689969/wireless/ssids
+2024-05-23 13:20:31 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:31 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689980/wireless/ssids', 'params': None}
+2024-05-23 13:20:31 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689980/wireless/ssids
+2024-05-23 13:20:31 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:31 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926690003/wireless/ssids', 'params': None}
+2024-05-23 13:20:31 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926690003/wireless/ssids
+2024-05-23 13:20:31 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:31 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691120/wireless/ssids', 'params': None}
+2024-05-23 13:20:31 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691120/wireless/ssids
+2024-05-23 13:20:32 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:32 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691722/wireless/ssids', 'params': None}
+2024-05-23 13:20:32 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691722/wireless/ssids
+2024-05-23 13:20:32 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:32 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693045/wireless/ssids', 'params': None}
+2024-05-23 13:20:32 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693045/wireless/ssids
+2024-05-23 13:20:32 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:32 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693046/wireless/ssids', 'params': None}
+2024-05-23 13:20:32 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693046/wireless/ssids
+2024-05-23 13:20:33 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:33 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926690375/wireless/ssids', 'params': None}
+2024-05-23 13:20:33 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926690375/wireless/ssids
+2024-05-23 13:20:33 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:33 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691502/wireless/ssids', 'params': None}
+2024-05-23 13:20:33 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691502/wireless/ssids
+2024-05-23 13:20:33 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:33 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691642/wireless/ssids', 'params': None}
+2024-05-23 13:20:33 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691642/wireless/ssids
+2024-05-23 13:20:34 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:34 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691844/wireless/ssids', 'params': None}
+2024-05-23 13:20:34 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691844/wireless/ssids
+2024-05-23 13:20:34 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:34 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691949/wireless/ssids', 'params': None}
+2024-05-23 13:20:34 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691949/wireless/ssids
+2024-05-23 13:20:34 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:34 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691957/wireless/ssids', 'params': None}
+2024-05-23 13:20:34 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691957/wireless/ssids
+2024-05-23 13:20:34 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:34 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691958/wireless/ssids', 'params': None}
+2024-05-23 13:20:34 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691958/wireless/ssids
+2024-05-23 13:20:35 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:35 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926696615/wireless/ssids', 'params': None}
+2024-05-23 13:20:35 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926696615/wireless/ssids
+2024-05-23 13:20:35 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:35 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702105/wireless/ssids', 'params': None}
+2024-05-23 13:20:35 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702105/wireless/ssids
+2024-05-23 13:20:35 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:35 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702106/wireless/ssids', 'params': None}
+2024-05-23 13:20:35 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702106/wireless/ssids
+2024-05-23 13:20:35 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:35 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702109/wireless/ssids', 'params': None}
+2024-05-23 13:20:35 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702109/wireless/ssids
+2024-05-23 13:20:36 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:20:36 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926712392/wireless/ssids', 'params': None}
+2024-05-23 13:20:36 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926712392/wireless/ssids
+2024-05-23 13:20:36 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:42:19 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 13:42:19 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 13:42:19 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 13:42:20 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 13:42:20 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 13:42:20 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 13:42:20 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 13:42:25 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 13:42:25 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 13:42:25 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:42:27 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/ssids', 'params': None}
+2024-05-23 13:42:27 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/ssids
+2024-05-23 13:42:27 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:01 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 13:46:01 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 13:46:01 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 13:46:01 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 13:46:01 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 13:46:01 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 13:46:02 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 13:46:02 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 13:46:02 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 13:46:02 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:02 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/ssids', 'params': None}
+2024-05-23 13:46:02 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/ssids
+2024-05-23 13:46:02 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:02 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689969/wireless/ssids', 'params': None}
+2024-05-23 13:46:02 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689969/wireless/ssids
+2024-05-23 13:46:02 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:02 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689980/wireless/ssids', 'params': None}
+2024-05-23 13:46:02 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689980/wireless/ssids
+2024-05-23 13:46:03 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:03 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926690003/wireless/ssids', 'params': None}
+2024-05-23 13:46:03 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926690003/wireless/ssids
+2024-05-23 13:46:03 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:03 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691120/wireless/ssids', 'params': None}
+2024-05-23 13:46:03 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691120/wireless/ssids
+2024-05-23 13:46:04 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:04 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691722/wireless/ssids', 'params': None}
+2024-05-23 13:46:04 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691722/wireless/ssids
+2024-05-23 13:46:04 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:04 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693045/wireless/ssids', 'params': None}
+2024-05-23 13:46:04 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693045/wireless/ssids
+2024-05-23 13:46:04 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:04 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693046/wireless/ssids', 'params': None}
+2024-05-23 13:46:04 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693046/wireless/ssids
+2024-05-23 13:46:05 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:05 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926690375/wireless/ssids', 'params': None}
+2024-05-23 13:46:05 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926690375/wireless/ssids
+2024-05-23 13:46:05 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:05 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691502/wireless/ssids', 'params': None}
+2024-05-23 13:46:05 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691502/wireless/ssids
+2024-05-23 13:46:05 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:05 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691642/wireless/ssids', 'params': None}
+2024-05-23 13:46:05 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691642/wireless/ssids
+2024-05-23 13:46:06 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:06 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691844/wireless/ssids', 'params': None}
+2024-05-23 13:46:06 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691844/wireless/ssids
+2024-05-23 13:46:06 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:06 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691949/wireless/ssids', 'params': None}
+2024-05-23 13:46:06 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691949/wireless/ssids
+2024-05-23 13:46:07 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:07 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691957/wireless/ssids', 'params': None}
+2024-05-23 13:46:07 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691957/wireless/ssids
+2024-05-23 13:46:07 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:07 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691958/wireless/ssids', 'params': None}
+2024-05-23 13:46:07 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691958/wireless/ssids
+2024-05-23 13:46:07 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:07 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926696615/wireless/ssids', 'params': None}
+2024-05-23 13:46:07 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926696615/wireless/ssids
+2024-05-23 13:46:07 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:07 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702105/wireless/ssids', 'params': None}
+2024-05-23 13:46:07 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702105/wireless/ssids
+2024-05-23 13:46:08 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:08 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702106/wireless/ssids', 'params': None}
+2024-05-23 13:46:08 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702106/wireless/ssids
+2024-05-23 13:46:08 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:08 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702109/wireless/ssids', 'params': None}
+2024-05-23 13:46:08 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702109/wireless/ssids
+2024-05-23 13:46:09 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:46:09 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926712392/wireless/ssids', 'params': None}
+2024-05-23 13:46:09 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926712392/wireless/ssids
+2024-05-23 13:46:09 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:38 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 13:47:38 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 13:47:38 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 13:47:39 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 13:47:39 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 13:47:39 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 13:47:39 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 13:47:39 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 13:47:39 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 13:47:39 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:39 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/ssids', 'params': None}
+2024-05-23 13:47:39 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/ssids
+2024-05-23 13:47:40 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:40 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689969/wireless/ssids', 'params': None}
+2024-05-23 13:47:40 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689969/wireless/ssids
+2024-05-23 13:47:40 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:40 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689980/wireless/ssids', 'params': None}
+2024-05-23 13:47:40 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689980/wireless/ssids
+2024-05-23 13:47:40 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:40 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926690003/wireless/ssids', 'params': None}
+2024-05-23 13:47:40 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926690003/wireless/ssids
+2024-05-23 13:47:41 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:41 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691120/wireless/ssids', 'params': None}
+2024-05-23 13:47:41 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691120/wireless/ssids
+2024-05-23 13:47:41 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:41 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691722/wireless/ssids', 'params': None}
+2024-05-23 13:47:41 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691722/wireless/ssids
+2024-05-23 13:47:41 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:41 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693045/wireless/ssids', 'params': None}
+2024-05-23 13:47:41 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693045/wireless/ssids
+2024-05-23 13:47:42 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:42 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693046/wireless/ssids', 'params': None}
+2024-05-23 13:47:42 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693046/wireless/ssids
+2024-05-23 13:47:42 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:42 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926690375/wireless/ssids', 'params': None}
+2024-05-23 13:47:42 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926690375/wireless/ssids
+2024-05-23 13:47:43 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:43 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691502/wireless/ssids', 'params': None}
+2024-05-23 13:47:43 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691502/wireless/ssids
+2024-05-23 13:47:43 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:43 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691642/wireless/ssids', 'params': None}
+2024-05-23 13:47:43 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691642/wireless/ssids
+2024-05-23 13:47:43 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:43 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691844/wireless/ssids', 'params': None}
+2024-05-23 13:47:43 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691844/wireless/ssids
+2024-05-23 13:47:43 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:43 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691949/wireless/ssids', 'params': None}
+2024-05-23 13:47:43 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691949/wireless/ssids
+2024-05-23 13:47:44 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:44 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691957/wireless/ssids', 'params': None}
+2024-05-23 13:47:44 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691957/wireless/ssids
+2024-05-23 13:47:44 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:44 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691958/wireless/ssids', 'params': None}
+2024-05-23 13:47:44 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691958/wireless/ssids
+2024-05-23 13:47:44 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:44 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926696615/wireless/ssids', 'params': None}
+2024-05-23 13:47:44 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926696615/wireless/ssids
+2024-05-23 13:47:45 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:45 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702105/wireless/ssids', 'params': None}
+2024-05-23 13:47:45 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702105/wireless/ssids
+2024-05-23 13:47:45 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:45 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702106/wireless/ssids', 'params': None}
+2024-05-23 13:47:45 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702106/wireless/ssids
+2024-05-23 13:47:45 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:45 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702109/wireless/ssids', 'params': None}
+2024-05-23 13:47:45 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702109/wireless/ssids
+2024-05-23 13:47:46 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 13:47:46 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926712392/wireless/ssids', 'params': None}
+2024-05-23 13:47:46 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926712392/wireless/ssids
+2024-05-23 13:47:46 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:18 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 14:08:18 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 14:08:18 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 14:08:19 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 14:08:19 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 14:08:19 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 14:08:19 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 14:08:19 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 14:08:19 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 14:08:19 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:44 INFO Meraki dashboard API session initialized with these parameters: {'version': '1.46.0', 'api_key': '************************************e8a5', 'base_url': 'https://api.meraki.com/api/v1', 'single_request_timeout': 60, 'certificate_path': '', 'requests_proxy': '', 'wait_on_rate_limit': True, 'nginx_429_retry_wait_time': 60, 'action_batch_retry_wait_time': 60, 'network_delete_retry_wait_time': 240, 'retry_4xx_error': False, 'retry_4xx_error_wait_time': 60, 'maximum_retries': 2, 'simulate': False, 'be_geo_id': None, 'caller': None, 'use_iterator_for_get_pages': False}
+2024-05-23 14:08:44 DEBUG {'tags': ['organizations', 'configure'], 'operation': 'getOrganizations', 'page': 1}
+2024-05-23 14:08:44 INFO GET https://api.meraki.com/api/v1/organizations
+2024-05-23 14:08:45 INFO organizations, getOrganizations; page 1 - 200 OK
+2024-05-23 14:08:45 DEBUG {'tags': ['organizations', 'configure', 'networks'], 'operation': 'getOrganizationNetworks', 'page': 1}
+2024-05-23 14:08:45 INFO GET https://api.meraki.com/api/v1/organizations/979170/networks
+2024-05-23 14:08:45 INFO organizations, getOrganizationNetworks; page 1 - 200 OK
+2024-05-23 14:08:45 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/ssids', 'params': None}
+2024-05-23 14:08:45 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/ssids
+2024-05-23 14:08:45 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:45 DEBUG {'tags': ['wireless', 'monitor', 'dataRateHistory'], 'operation': 'getNetworkWirelessDataRateHistory', 'method': 'GET', 'url': '/networks/L_631066897785292883/wireless/dataRateHistory', 'params': {'ssid': 7}}
+2024-05-23 14:08:45 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292883/wireless/dataRateHistory
+2024-05-23 14:08:47 INFO wireless, getNetworkWirelessDataRateHistory - 200 OK
+2024-05-23 14:08:47 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/ssids', 'params': None}
+2024-05-23 14:08:47 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/ssids
+2024-05-23 14:08:48 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:48 DEBUG {'tags': ['wireless', 'monitor', 'dataRateHistory'], 'operation': 'getNetworkWirelessDataRateHistory', 'method': 'GET', 'url': '/networks/L_631066897785292884/wireless/dataRateHistory', 'params': {'ssid': 6}}
+2024-05-23 14:08:48 INFO GET https://api.meraki.com/api/v1/networks/L_631066897785292884/wireless/dataRateHistory
+2024-05-23 14:08:48 INFO wireless, getNetworkWirelessDataRateHistory - 200 OK
+2024-05-23 14:08:48 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689969/wireless/ssids', 'params': None}
+2024-05-23 14:08:48 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689969/wireless/ssids
+2024-05-23 14:08:48 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:48 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926689980/wireless/ssids', 'params': None}
+2024-05-23 14:08:48 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926689980/wireless/ssids
+2024-05-23 14:08:49 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:49 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926690003/wireless/ssids', 'params': None}
+2024-05-23 14:08:49 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926690003/wireless/ssids
+2024-05-23 14:08:49 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:49 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691120/wireless/ssids', 'params': None}
+2024-05-23 14:08:49 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691120/wireless/ssids
+2024-05-23 14:08:49 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:49 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926691722/wireless/ssids', 'params': None}
+2024-05-23 14:08:49 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926691722/wireless/ssids
+2024-05-23 14:08:50 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:50 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693045/wireless/ssids', 'params': None}
+2024-05-23 14:08:50 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693045/wireless/ssids
+2024-05-23 14:08:50 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:50 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/L_810647932926693046/wireless/ssids', 'params': None}
+2024-05-23 14:08:50 INFO GET https://api.meraki.com/api/v1/networks/L_810647932926693046/wireless/ssids
+2024-05-23 14:08:51 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:51 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926690375/wireless/ssids', 'params': None}
+2024-05-23 14:08:51 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926690375/wireless/ssids
+2024-05-23 14:08:51 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:51 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691502/wireless/ssids', 'params': None}
+2024-05-23 14:08:51 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691502/wireless/ssids
+2024-05-23 14:08:51 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:51 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691642/wireless/ssids', 'params': None}
+2024-05-23 14:08:51 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691642/wireless/ssids
+2024-05-23 14:08:52 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:52 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691844/wireless/ssids', 'params': None}
+2024-05-23 14:08:52 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691844/wireless/ssids
+2024-05-23 14:08:52 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:52 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691949/wireless/ssids', 'params': None}
+2024-05-23 14:08:52 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691949/wireless/ssids
+2024-05-23 14:08:52 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:52 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691957/wireless/ssids', 'params': None}
+2024-05-23 14:08:52 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691957/wireless/ssids
+2024-05-23 14:08:52 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:52 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926691958/wireless/ssids', 'params': None}
+2024-05-23 14:08:52 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926691958/wireless/ssids
+2024-05-23 14:08:53 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:53 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926696615/wireless/ssids', 'params': None}
+2024-05-23 14:08:53 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926696615/wireless/ssids
+2024-05-23 14:08:53 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:53 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702105/wireless/ssids', 'params': None}
+2024-05-23 14:08:53 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702105/wireless/ssids
+2024-05-23 14:08:53 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:53 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702106/wireless/ssids', 'params': None}
+2024-05-23 14:08:53 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702106/wireless/ssids
+2024-05-23 14:08:53 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:53 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926702109/wireless/ssids', 'params': None}
+2024-05-23 14:08:53 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926702109/wireless/ssids
+2024-05-23 14:08:54 INFO wireless, getNetworkWirelessSsids - 200 OK
+2024-05-23 14:08:54 DEBUG {'tags': ['wireless', 'configure', 'ssids'], 'operation': 'getNetworkWirelessSsids', 'method': 'GET', 'url': '/networks/N_810647932926712392/wireless/ssids', 'params': None}
+2024-05-23 14:08:54 INFO GET https://api.meraki.com/api/v1/networks/N_810647932926712392/wireless/ssids
+2024-05-23 14:08:54 INFO wireless, getNetworkWirelessSsids - 200 OK

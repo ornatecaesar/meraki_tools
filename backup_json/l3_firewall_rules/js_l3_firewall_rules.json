@@ -1,0 +1,344 @@
+{
+    "rules": [
+        {
+            "comment": "Meraki Cloud Comms",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "10.2.255.0/24,10.2.16.0/24",
+            "destPort": "7351",
+            "destCidr": "108.161.147.0/24,199.231.78.0/24,64.62.142.12/32,209.206.48.0/20,216.157.128.0/20,158.115.128.0/19",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "DNS",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "53",
+            "destCidr": "Any",
+            "syslogEnabled": true
+        },
+        {
+            "comment": "Fire Panel Call Out Registraion",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "10.2.35.17/32",
+            "destPort": "5060",
+            "destCidr": "172.167.147.205/32",
+            "syslogEnabled": true
+        },
+        {
+            "comment": "Server DNS Transfers",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "OBJ(810647932926689745),OBJ(810647932926689746)",
+            "destPort": "53",
+            "destCidr": "OBJ(810647932926689745),OBJ(810647932926689746)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "NTP",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "123",
+            "destCidr": "GRP(810647932926689353)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "HTTP",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "80",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Smoothwall",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "81,800",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "HTTPS",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "443",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "SMTP",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "25,587",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Smoothwall Updates",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "GRP(810647932926689391)",
+            "destPort": "Any",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "IMAP4",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "143,993",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "ICMP",
+            "policy": "allow",
+            "protocol": "icmp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "Any",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "POP3",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "995",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "MS Teams",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "3478,3479,3480,3481",
+            "destCidr": "GRP(399)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Teamviewer",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "5938",
+            "destCidr": "*.teamviewer.com",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "SchoolCloud",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "3478",
+            "destCidr": "GRP(400)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "SchoolCloud",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "10000-60000",
+            "destCidr": "GRP(400)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Uniform Shop Dashboard",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "2083",
+            "destCidr": "OBJ(810647932926689588)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Oliver",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "OBJ(2718),OBJ(2719)",
+            "destPort": "210,213,7290,20211",
+            "destCidr": "GRP(403),GRP(402)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Avaya Voice IPs",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "1719,5005,5060",
+            "destCidr": "GRP(448)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Avaya Voice IPs",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "7070,411,8411,1720,5060",
+            "destCidr": "GRP(448)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Avaya Voice IPs",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "1718-1720",
+            "destCidr": "GRP(448)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Avaya Voice IPs",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "46750-50750",
+            "destCidr": "GRP(448)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Avaya Voice Domain",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "7070",
+            "destCidr": "OBJ(3530)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "iPad and Apple TVs 1",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "OBJ(810647932926689742)",
+            "destPort": "5223",
+            "destCidr": "OBJ(810647932926689740)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "iPad and Apple TVs 2",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "OBJ(810647932926689742)",
+            "destPort": "5223",
+            "destCidr": "OBJ(810647932926689739)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "iPad and Apple TVs 3",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "OBJ(810647932926689742)",
+            "destPort": "5223,2197",
+            "destCidr": "OBJ(810647932926689741)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Google Meet",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "19302-19309",
+            "destCidr": "GRP(449)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Senso",
+            "policy": "allow",
+            "protocol": "any",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "Any",
+            "destCidr": "GRP(810647932926689388)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Python Modules",
+            "policy": "allow",
+            "protocol": "tcp",
+            "srcPort": "Any",
+            "srcCidr": "OBJ(810647932926689548)",
+            "destPort": "Any",
+            "destCidr": "OBJ(810647932926689553)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Cisco Sandbox",
+            "policy": "allow",
+            "protocol": "any",
+            "srcPort": "Any",
+            "srcCidr": "OBJ(810647932926689548)",
+            "destPort": "Any",
+            "destCidr": "GRP(810647932926689320)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "PRTG SNMP",
+            "policy": "allow",
+            "protocol": "udp",
+            "srcPort": "Any",
+            "srcCidr": "OBJ(810647932926689648)",
+            "destPort": "161",
+            "destCidr": "OBJ(810647932926689649)",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Block All",
+            "policy": "deny",
+            "protocol": "any",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "Any",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        },
+        {
+            "comment": "Default rule",
+            "policy": "allow",
+            "protocol": "Any",
+            "srcPort": "Any",
+            "srcCidr": "Any",
+            "destPort": "Any",
+            "destCidr": "Any",
+            "syslogEnabled": false
+        }
+    ]
+}
