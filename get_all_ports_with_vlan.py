@@ -29,6 +29,7 @@ logging.getLogger().setLevel(logging.WARNING)
 logging.getLogger('meraki').setLevel(logging.WARNING)
 
 df_switch_details = pd.DataFrame(columns=['Switch Name', 'Port Number', 'Port Type'])
+vlan_to_find = 2000
 
 
 def is_vlan_in_list(vlan, vlan_list_string):
@@ -54,8 +55,6 @@ def is_vlan_in_list(vlan, vlan_list_string):
                 return True
 
     return False
-
-vlan_to_find = 20
 
 dashboard = meraki.DashboardAPI(api_key=API_KEY,
                                 print_console=False,

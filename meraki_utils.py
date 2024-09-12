@@ -2,10 +2,10 @@ import os
 import logging
 import meraki
 
-def connect_to_meraki(api_key, print_console=False):
+def connect_to_meraki(print_console=False):
 
     dashboard = meraki.DashboardAPI(
-        api_key=api_key,
+        api_key=os.environ.get('MERAKI_API_KEY'),
         base_url='https://api.meraki.com/api/v1',
         print_console=False,
         output_log=True,
