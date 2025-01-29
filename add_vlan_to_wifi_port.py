@@ -23,7 +23,7 @@ logging.getLogger().setLevel(logging.WARNING)
 logging.getLogger('meraki').setLevel(logging.WARNING)
 
 actions = []
-vlan_to_add = 56
+vlan_to_add = 68
 
 
 def is_vlan_in_list(vlan, vlan_list_string):
@@ -84,7 +84,7 @@ for org in organizations:
 
         # Only interested in the Switch devices
         switches = [d for d in devices if d['model'].startswith('MS')]
-        switches = [s for s in switches if 'C-SW-ACC-01' in s['name']]
+        switches = [s for s in switches if 'C-SW-KB' in s['name']]
 
         for switch in switches:
             try:
@@ -101,23 +101,26 @@ for org in organizations:
                         (port['vlan'] == 16 and 'all' not in port['allowedVlans']) or
                         (port['vlan'] == 1001 and is_vlan_in_list(16, port['allowedVlans']) == True))):
 
-                    if len(actions) < 19:
-                        logging.info(f"Adding port {port['portId']} on switch {switch['name']} to action batch.")
 
-                        allowed_vlans = port['allowedVlans']
+                    logging.info(f"Adding port {port['portId']} on switch {switch['name']} to action batch.")
 
-                        allowed_vlans += f",{vlan_to_add}"
-                        actions.append(
-                            {
-                                "resource": f"/devices/{switch['serial']}/switch/ports/{port['portId']}",
-                                'operation': 'update',
-                                'body': {
-                                    'allowedVlans': allowed_vlans
-                                }
+                    # Append new VLAN to currently allowed VLANs
+                    allowed_vlans = port['allowedVlans']
+                    allowed_vlans += f",{vlan_to_add}"
+
+                    # Add new allowed_vlans to action batch
+                    actions.append(
+                        {
+                            "resource": f"/devices/{switch['serial']}/switch/ports/{port['portId']}",
+                            'operation': 'update',
+                            'body': {
+                                'allowedVlans': allowed_vlans
                             }
-                        )
+                        }
+                    )
 
-                    else:
+                    # If the number of action in the batch is 20, execute to the action batch
+                    if len(actions) == 20:
                         try:
                             logging.info(f"Executing Action Batch")
                             response = dashboard.organizations.createOrganizationActionBatch(
@@ -130,7 +133,25 @@ for org in organizations:
                             actions = []
                         except meraki.APIError as e:
                             logging.error(f"Unable to execute action batch: {e}")
+                            actions = [] # Reset actions even if batch execution fails
+                        except Exception as e:
+                            logging.error(f"An unexpected error occured: {e}")
+                            actions = []
 
+    # After all loops, execute any remaining actions
+    if actions:
+        try:
+            logging.info(f"Executing Final Action Batch with {len(actions)} actions.")
+            response = dashboard.organizations.createOrganizationActionBatch(
+                organizationId=org['id'],
+                actions=actions,
+                confirmed=True,
+                synchronous=True
+            )
+        except meraki.APIError as e:
+            logging.error(f"Unable to execute final action batch: {e}")
+        except Exception as e:
+            logging.error(f"An unexpected error occured: {e}")
 
 
 
