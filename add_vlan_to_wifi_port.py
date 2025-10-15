@@ -23,7 +23,7 @@ logging.getLogger().setLevel(logging.WARNING)
 logging.getLogger('meraki').setLevel(logging.WARNING)
 
 actions = []
-vlan_to_add = 68
+vlan_to_add = 790
 
 
 def is_vlan_in_list(vlan, vlan_list_string):
@@ -84,7 +84,7 @@ for org in organizations:
 
         # Only interested in the Switch devices
         switches = [d for d in devices if d['model'].startswith('MS')]
-        switches = [s for s in switches if 'C-SW-KB' in s['name']]
+        switches = [s for s in switches if 'J-SW-ARK' in s['name']]
 
         for switch in switches:
             try:

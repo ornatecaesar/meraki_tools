@@ -1,3 +1,7 @@
 /logs/
 !/backup_json/
 !/logs/
+!/test.py
+!/stack_utilization.py
+!/test.py
+!*.csv
