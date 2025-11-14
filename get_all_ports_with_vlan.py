@@ -29,7 +29,7 @@ logging.getLogger().setLevel(logging.WARNING)
 logging.getLogger('meraki').setLevel(logging.WARNING)
 
 df_switch_details = pd.DataFrame(columns=['Switch Name', 'Port Number', 'Port Type'])
-vlan_to_find = 160
+vlan_to_find = 52
 
 
 def is_vlan_in_list(vlan, vlan_list_string):

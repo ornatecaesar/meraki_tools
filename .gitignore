@@ -5,3 +5,4 @@
 !/stack_utilization.py
 !/test.py
 !*.csv
+!/config_test.py
