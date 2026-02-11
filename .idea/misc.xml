@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.11 (meraki_tools)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.13 (meraki_tools)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="uv (meraki_tools)" project-jdk-type="Python SDK" />
 </project>
