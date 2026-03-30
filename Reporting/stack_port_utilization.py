@@ -56,7 +56,7 @@ def get_all_switch_mac(dashboard: DashboardAPI, ord_id: str) -> List[str]:
                 for member in stack.get('members', []):
                     macs.append(member['mac'])
         except Exception as e:
-            logger.warning(f"Failed to get stacks fr networrk {network['id']}: {e}")
+            logger.warning(f"Failed to get stacks for network {network['id']}: {e}")
 
     logger.info(f"Found {len(macs)} switch MAC addresses")
     return macs
