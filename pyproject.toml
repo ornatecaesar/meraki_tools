@@ -1,0 +1,11 @@
+[project]
+name = "meraki-tools"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.14"
+dependencies = [
+    "matplotlib==3.10.8",
+    "meraki==2.2.0",
+    "pandas==3.0.1",
+    "seaborn==0.13.2",
+]
