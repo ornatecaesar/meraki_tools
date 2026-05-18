@@ -22,8 +22,9 @@ logging.basicConfig(filename=f'logs/{log_file_name}',
 logging.getLogger().setLevel(logging.WARNING)
 logging.getLogger('meraki').setLevel(logging.WARNING)
 
+# New VLAN information
 actions = []
-vlan_to_add = 790
+vlan_to_add = 13
 
 
 def is_vlan_in_list(vlan, vlan_list_string):
@@ -84,7 +85,7 @@ for org in organizations:
 
         # Only interested in the Switch devices
         switches = [d for d in devices if d['model'].startswith('MS')]
-        switches = [s for s in switches if 'J-SW-ARK' in s['name']]
+        switches = [s for s in switches if 'C-SW' in s['name']]
 
         for switch in switches:
             try:
