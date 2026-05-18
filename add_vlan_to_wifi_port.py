@@ -7,7 +7,7 @@ from meraki_utils import connect_to_meraki, meraki_error, other_error
 API_KEY = os.getenv('MERAKI_API_KEY')
 
 # Logging
-logging_dir = Path('logs')
+logging_dir = Path('../logs')
 if not logging_dir.exists():
     logging_dir.mkdir(parents=True)
 
