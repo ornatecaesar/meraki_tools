@@ -19,7 +19,8 @@ pd.set_option('display.max_colwidth', None)
 # Connect to Meraki dashboard
 dashboard = connect_to_meraki()
 
-interface_info_df = pd.DataFrame(columns=['name', 'subnet', 'interfaceIp', 'vlanId', 'switch', 'network'])
+# Collect interface info in a list
+interface_data = []
 
 # Attempt to obtain organizations
 try:
@@ -71,31 +72,36 @@ for org in organizations:
             if device['serial'] not in stack_serials:
                 l3_interface_info = dashboard.switch.getDeviceSwitchRoutingInterfaces(serial=device['serial'])
                 for l3_interface in l3_interface_info:
-                    interface_info_df = interface_info_df._append({
+                    interface_data.append({
                         'name': l3_interface['name'],
                         'subnet': l3_interface['subnet'],
                         'interfaceIp': l3_interface['interfaceIp'],
                         'vlanId': l3_interface['vlanId'],
                         'switch': device['name'],
                         'network': net['name']
-                    }, ignore_index=True)
+                    })
 
         for stack in stacks:
             l3_interface_info = dashboard.switch.getNetworkSwitchStackRoutingInterfaces(networkId=net['id'], switchStackId=stack['id'])
             for l3_interface in l3_interface_info:
-                interface_info_df = interface_info_df._append({
+                interface_data.append({
                     'name': l3_interface['name'],
                     'subnet': l3_interface['subnet'],
                     'interfaceIp': l3_interface['interfaceIp'],
                     'vlanId': l3_interface['vlanId'],
                     'switch': stack['name'],
                     'network': net['name']
-                }, ignore_index=True)
+                })
 
+# Build final DataFrame from the collected list
+if interface_data:
+    interface_data_df = pd.DataFrame(interface_data)
+else:
+    interface_data_df = pd.DataFrame(columns=['name', 'subnet', 'interfaceIp', 'vlanId', 'switch', 'network'])
 
 # Ensure directory exists
 export_dir = pathlib.Path('csv_exports')
 export_dir.mkdir(parents=True, exist_ok=True)
 
 # Export dataframe to csv
-interface_info_df.to_csv(export_dir / 'interface_info_df.csv', header=True, index=False)
+interface_data_df.to_csv(export_dir / 'interface_info_df.csv', header=True, index=False)
