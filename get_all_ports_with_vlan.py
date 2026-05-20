@@ -28,8 +28,7 @@ logging.basicConfig(filename=f'logs/{log_file_name}',
 logging.getLogger().setLevel(logging.WARNING)
 logging.getLogger('meraki').setLevel(logging.WARNING)
 
-df_switch_details = pd.DataFrame(columns=['Switch Name', 'Port Number', 'Port Type'])
-vlan_to_find = 52
+vlan_to_find = 700
 
 
 def is_vlan_in_list(vlan, vlan_list_string):
@@ -61,6 +60,11 @@ dashboard = meraki.DashboardAPI(api_key=API_KEY,
                                 output_log=True,
                                 inherit_logging_config=True,
                                 log_file_prefix=f'{__file__}')
+
+# Collect matching port details in a list (then build DF once at the end).
+# This replaces the deprecated DataFrame._append() calls which no longer work
+# reliably in recent pandas versions (append was removed in pandas 2.0).
+ports_data = []
 
 # Get organizations
 try:
@@ -103,32 +107,31 @@ for org in organizations:
             except Exception as e:
                 other_error(e)
 
-
             for port in switch_ports:
                 if port['type'] == 'trunk':
                     # If the current port is a trunk, look for VLAN number in multiple attributes of the port
                     if ((port['vlan'] == vlan_to_find and 'all' not in port['allowedVlans']) or
                             (port['vlan'] == 1001 and is_vlan_in_list(vlan_to_find, port['allowedVlans']) == True)):
 
-                        # Add switch port details to dataframe
-                        df_switch_details = df_switch_details._append({
+                        # Add switch port details to list (instead of DF append)
+                        ports_data.append({
                             'Switch Name': switch['name'],
                             'Port Number': port['portId'],
                             'Port Type': port['type']
-                        }, ignore_index=True)
+                        })
                 elif port['type'] == 'access':
-                    # If the current port is an access port, check if the 'vlan' attribute mathces the vlan_to_find
+                    # If the current port is an access port, check if the 'vlan' attribute matches the vlan_to_find
                     if port['vlan'] == vlan_to_find:
-                        df_switch_details = df_switch_details._append({
+                        ports_data.append({
                             'Switch Name': switch['name'],
                             'Port Number': port['portId'],
                             'Port Type': port['type']
-                        }, ignore_index=True)
+                        })
+
+# Build the DataFrame once from the collected list (best practice + performant)
+if ports_data:
+    df_switch_details = pd.DataFrame(ports_data)
+else:
+    df_switch_details = pd.DataFrame(columns=['Switch Name', 'Port Number', 'Port Type'])
 
 print(df_switch_details)
-
-
-
-
-
-
