@@ -28,7 +28,7 @@ CONFIG = {
     'interval_seconds': 14400, # 4 hours
     'dpi': 150,
     'figure_size': (18, 6),
-    'report_prefix': 'switch_port_utilization',
+    'report_prefix': 'stack_port_utilization',
     'log_level': logging.INFO
 }
 

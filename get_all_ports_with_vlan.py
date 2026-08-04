@@ -85,7 +85,7 @@ for org in organizations:
         other_error(e)
 
     # Only retain networks that contain switches
-    networks = [n for n in networks if 'switch' in n['productTypes'] and 'college' in n['name'].lower()]
+    networks = [n for n in networks if 'switch' in n['productTypes'] and 'junior' in n['name'].lower()]
 
     # Get all the devices on each network
     for network in networks:
