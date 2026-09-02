@@ -22,7 +22,7 @@ logging.basicConfig(filename=f'../logs/{log_file_name}',
 logging.getLogger('meraki').setLevel(logging.WARNING)
 
 actions = []
-vlan_to_remove = 700
+vlan_to_remove = 45
 
 
 def is_vlan_in_list(vlan, vlan_list_string):
@@ -138,7 +138,7 @@ for org in organizations:
 
         # Only interested in the Switch devices matching naming convention
         switches = [d for d in devices if d['model'].startswith('MS')]
-        switches = [s for s in switches if 'C-SW' in s['name']]
+        switches = [s for s in switches if 'C-SW-LB' in s['name']]
 
         for switch in switches:
             try:

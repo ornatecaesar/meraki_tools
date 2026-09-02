@@ -28,7 +28,7 @@ logging.basicConfig(filename=f'logs/{log_file_name}',
 logging.getLogger().setLevel(logging.WARNING)
 logging.getLogger('meraki').setLevel(logging.WARNING)
 
-vlan_to_find = 700
+vlan_to_find = 100
 
 
 def is_vlan_in_list(vlan, vlan_list_string):
