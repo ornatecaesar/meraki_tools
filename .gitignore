@@ -1,8 +1,50 @@
-/logs/
-!/backup_json/
-!/logs/
-!/test.py
-!/stack_utilization.py
-!/test.py
-!*.csv
-!/config_test.py
+# ---------------------------------------------------------------------------
+# Private network data
+# Script outputs can contain real network details (device names, subnets,
+# firewall rules, serials). None of it belongs in this public repository.
+# ---------------------------------------------------------------------------
+logs/
+*.log
+backup_json/
+backups/
+csv_exports/
+exports/
+output/
+reports/
+*.csv
+*.xlsx
+*.pdf
+
+# Secrets: the Meraki API key is read from the MERAKI_API_KEY environment
+# variable and must never be committed.
+.env
+.env.*
+!.env.example
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ---------------------------------------------------------------------------
+# Editors and OS
+# ---------------------------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
