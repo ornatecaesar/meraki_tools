@@ -2,12 +2,12 @@ import os
 from pathlib import Path
 import logging
 import meraki
-from meraki_utils import connect_to_meraki, meraki_error, other_error
+from meraki_tools.core.legacy import connect_to_meraki, meraki_error, other_error
 
 API_KEY = os.getenv('MERAKI_API_KEY')
 
 # Logging
-logging_dir = Path('../logs')
+logging_dir = Path('logs')
 if not logging_dir.exists():
     logging_dir.mkdir(parents=True)
 
@@ -15,7 +15,7 @@ if not logging_dir.exists():
 script_name = os.path.basename(__file__)
 script_name = os.path.splitext(script_name)[0]
 log_file_name = f"{script_name}.log"
-logging.basicConfig(filename=f'../logs/{log_file_name}',
+logging.basicConfig(filename=f'logs/{log_file_name}',
                     level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S')

@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 import sqlite3
 
-from meraki_utils import connect_to_meraki
+from meraki_tools.core.legacy import connect_to_meraki
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth', None)
