@@ -22,6 +22,8 @@ COMMANDS: dict[str, str] = {
     "desk-port-to-wifi-trunk": "meraki_tools.switching.set_desk_port_to_wifi_trunk",
     "export-subnet-info": "meraki_tools.switching.export_subnet_info",
     "find-ports-with-vlan": "meraki_tools.switching.find_ports_with_vlan",
+    "port-status-snapshot": "meraki_tools.reporting.port_status_snapshot",
+    "port-utilization-report": "meraki_tools.reporting.port_utilization_report",
     "remove-stp": "meraki_tools.switching.remove_stp",
     "remove-vlan-from-ap-trunks": "meraki_tools.wireless.remove_vlan_from_wifi_port",
     "ssid-data-rate": "meraki_tools.wireless.get_ssid_data_rate",
