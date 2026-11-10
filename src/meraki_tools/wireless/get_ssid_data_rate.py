@@ -1,48 +1,129 @@
-import os
-import logging
-from pathlib import Path
-import pandas as pd
-import meraki
+"""Report the data rate history of an SSID across your wireless networks.
 
-# Logging
-logging_dir = Path('logs')
-if not logging_dir.exists():
-    logging_dir.mkdir(parents=True)
+For each enabled SSID whose name contains the given text, fetches the average,
+download and upload rates per interval over the chosen period, then prints a
+summary (average and peak) and optionally saves every interval to CSV.
 
-# Configure log file names, level and content
-script_name = os.path.basename(__file__)
-script_name = os.path.splitext(script_name)[0]
-log_file_name = f"{script_name}.log"
-logging.basicConfig(filename=f'logs/{log_file_name}',
-                    level=logging.WARNING,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-logging.getLogger().setLevel(logging.WARNING)
-logging.getLogger('meraki').setLevel(logging.WARNING)
+Examples:
+    Last 24 hours in 5-minute intervals:
 
-# Variables
-ssid_of_interest = 'SGW Devices'
-ssid_data_rate_df = pd.DataFrame(columns=['start_time', 'end_time', 'download_kbps', 'upload_kbps', 'average_kbps'])
+        meraki-tools ssid-data-rate "Staff WiFi"
 
-dashboard = meraki.DashboardAPI(api_key=os.getenv('MERAKI_API_KEY'),
-                                print_console=False,
-                                output_log=True,
-                                inherit_logging_config=True,
-                                log_file_prefix=f'{__file__}')
+    Last 7 days in hourly intervals, saved to output/get_ssid_data_rate/:
 
-organization = dashboard.organizations.getOrganizations()[0]
+        meraki-tools ssid-data-rate Staff --hours 168 --resolution 3600 --csv
+"""
 
-networks = dashboard.organizations.getOrganizationNetworks(organizationId=organization['id'])
+from __future__ import annotations
 
-networks = [n for n in networks if 'wireless' in n['productTypes']]
+import argparse
+from collections.abc import Sequence
+from typing import Any
 
-for network in networks:
-    ssids = dashboard.wireless.getNetworkWirelessSsids(networkId=network['id'])
-    # ssids = [s for sublist in ssids for s in sublist if ssid_of_interest in s['name']]
-    for ssid in ssids:
-        if ssid_of_interest in ssid['name'] and ssid['enabled'] == True:
-            ssid_usage = dashboard.wireless.getNetworkWirelessDataRateHistory(networkId=network['id'], timespan=86400, resolution=300,ssid=ssid['number'])
-            # ssid_data_rate_df._append(
-            #     {'start_time': ssid_usage['startTs']}
-            # )
-            print(ssid_data_rate_df.head())
+from meraki_tools.core.cli import ToolContext, base_parser, run_tool
+from meraki_tools.core.output import dated_output_path, format_table, write_csv
+
+TOOL_NAME = "get_ssid_data_rate"
+
+#: Interval lengths, in seconds, that the data rate history endpoint accepts.
+RESOLUTIONS = (300, 600, 1200, 3600, 14400, 86400)
+#: Longest period the endpoint can look back over (31 days).
+MAX_HOURS = 31 * 24
+
+CSV_COLUMNS = ["network", "ssid", "startTs", "endTs", "averageKbps", "downloadKbps", "uploadKbps"]
+SUMMARY_COLUMNS = ["network", "ssid", "intervals", "avg_mbps", "peak_mbps", "peak_at"]
+
+
+def summarise(intervals: list[dict[str, Any]]) -> dict[str, Any]:
+    """Return the interval count, mean and peak average rate (in Mbps).
+
+    Intervals with no data (``averageKbps`` of ``None``) are ignored.
+
+    Example:
+        >>> summarise([{"startTs": "t1", "averageKbps": 1000}, {"startTs": "t2", "averageKbps": 3000}])
+        {'intervals': 2, 'avg_mbps': 2.0, 'peak_mbps': 3.0, 'peak_at': 't2'}
+    """
+    with_data = [i for i in intervals if i.get("averageKbps") is not None]
+    if not with_data:
+        return {"intervals": 0, "avg_mbps": None, "peak_mbps": None, "peak_at": None}
+    peak = max(with_data, key=lambda i: i["averageKbps"])
+    mean = sum(i["averageKbps"] for i in with_data) / len(with_data)
+    return {
+        "intervals": len(with_data),
+        "avg_mbps": round(mean / 1000, 1),
+        "peak_mbps": round(peak["averageKbps"] / 1000, 1),
+        "peak_at": peak.get("startTs"),
+    }
+
+
+def hours_arg(value: str) -> int:
+    """Argparse type for a look-back period between 1 hour and 31 days."""
+    hours = int(value)
+    if not 1 <= hours <= MAX_HOURS:
+        raise argparse.ArgumentTypeError(f"--hours must be between 1 and {MAX_HOURS}")
+    return hours
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """Return the argument parser for this tool."""
+    parser = base_parser(__doc__)
+    parser.add_argument("ssid", help="include SSIDs whose name contains this text (case-insensitive)")
+    parser.add_argument("--hours", type=hours_arg, default=24, help="how far back to look (default: 24)")
+    parser.add_argument(
+        "--resolution",
+        type=int,
+        choices=RESOLUTIONS,
+        default=300,
+        help="interval length in seconds (default: 300)",
+    )
+    parser.add_argument(
+        "--network",
+        metavar="TEXT",
+        help="only networks whose name contains TEXT (case-insensitive)",
+    )
+    parser.add_argument("--csv", action="store_true", help="save every interval to a CSV file")
+    return parser
+
+
+def run(context: ToolContext) -> int:
+    """Fetch and summarise the data rate history for every matching SSID."""
+    dashboard, args, log = context.dashboard, context.args, context.logger
+
+    networks = dashboard.organizations.getOrganizationNetworks(
+        context.organization_id, productTypes=["wireless"], total_pages="all"
+    )
+    if args.network:
+        networks = [n for n in networks if args.network.lower() in n["name"].lower()]
+
+    needle = args.ssid.lower()
+    summaries: list[dict[str, Any]] = []
+    csv_rows: list[dict[str, Any]] = []
+    for network in sorted(networks, key=lambda n: n["name"].lower()):
+        for ssid in dashboard.wireless.getNetworkWirelessSsids(network["id"]):
+            if not ssid.get("enabled") or needle not in ssid["name"].lower():
+                continue
+            intervals = dashboard.wireless.getNetworkWirelessDataRateHistory(
+                network["id"], timespan=args.hours * 3600, resolution=args.resolution, ssid=ssid["number"]
+            )
+            labels = {"network": network["name"], "ssid": ssid["name"]}
+            summaries.append({**labels, **summarise(intervals)})
+            csv_rows += [{**labels, **interval} for interval in intervals]
+
+    if not summaries:
+        log.warning("No enabled SSID matching %r found", args.ssid)
+        return 0
+
+    print(format_table(summaries, SUMMARY_COLUMNS))
+    if args.csv:
+        path = write_csv(csv_rows, CSV_COLUMNS, dated_output_path(TOOL_NAME, "ssid_data_rate", ".csv"))
+        log.info("Saved %d intervals to %s", len(csv_rows), path)
+    return 0
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run the tool from the command line."""
+    return run_tool(TOOL_NAME, build_parser(), run, argv)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

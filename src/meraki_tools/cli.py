@@ -18,10 +18,13 @@ from collections.abc import Sequence
 
 #: Command name → module that provides ``main(argv)``.
 COMMANDS: dict[str, str] = {
+    "add-vlan-to-ap-trunks": "meraki_tools.wireless.add_vlan_to_wifi_port",
     "desk-port-to-wifi-trunk": "meraki_tools.switching.set_desk_port_to_wifi_trunk",
     "export-subnet-info": "meraki_tools.switching.export_subnet_info",
     "find-ports-with-vlan": "meraki_tools.switching.find_ports_with_vlan",
     "remove-stp": "meraki_tools.switching.remove_stp",
+    "remove-vlan-from-ap-trunks": "meraki_tools.wireless.remove_vlan_from_wifi_port",
+    "ssid-data-rate": "meraki_tools.wireless.get_ssid_data_rate",
     "tag-trunk-ports": "meraki_tools.switching.tag_all_trunk_ports",
 }
 
