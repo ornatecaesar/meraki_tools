@@ -19,6 +19,7 @@ from collections.abc import Sequence
 #: Command name → module that provides ``main(argv)``.
 COMMANDS: dict[str, str] = {
     "add-vlan-to-ap-trunks": "meraki_tools.wireless.add_vlan_to_wifi_port",
+    "backup-l3-firewall-rules": "meraki_tools.backups.backup_l3_firewall_rules",
     "desk-port-to-wifi-trunk": "meraki_tools.switching.set_desk_port_to_wifi_trunk",
     "export-subnet-info": "meraki_tools.switching.export_subnet_info",
     "find-ports-with-vlan": "meraki_tools.switching.find_ports_with_vlan",
