@@ -1,8 +1,11 @@
 [project]
 name = "meraki-tools"
-version = "0.2.0"
+version = "1.0.0"
 description = "Command-line tools for automating and reporting on Cisco Meraki switch and wireless networks."
-authors = [{ name = "David" }]
+readme = "README.md"
+authors = [{ name = "David Lawson" }]
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -14,6 +17,9 @@ dependencies = [
     "matplotlib>=3.10",
 ]
 
+[project.urls]
+Repository = "https://github.com/ornatecaesar/meraki_tools"
+
 [project.scripts]
 meraki-tools = "meraki_tools.cli:main"
 
@@ -21,10 +27,6 @@ meraki-tools = "meraki_tools.cli:main"
 dev = [
     "pytest>=9.0",
     "ruff>=0.17",
-]
-# Only needed for the exploratory notebook in notebooks/.
-notebook = [
-    "pandas>=3.0",
 ]
 
 [build-system]
@@ -66,7 +68,6 @@ convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["D", "PLR2004"]
-"notebooks/**" = ["ALL"]
 
 # ---------------------------------------------------------------------------
 # Pytest
