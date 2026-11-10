@@ -87,7 +87,7 @@ def iter_switch_ports(
         network: Only include switches in networks whose name contains this
             text (case-insensitive).
         switch_name: Only include switches whose name contains this text.
-            The Dashboard does this match, case-insensitively.
+            The Dashboard does this match.
 
     Yields:
         ``(switch, ports)`` pairs, sorted by switch name.

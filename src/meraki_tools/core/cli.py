@@ -111,7 +111,7 @@ def add_switch_filters(parser: argparse.ArgumentParser) -> None:
     group.add_argument(
         "--switch",
         metavar="TEXT",
-        help="only switches whose name contains TEXT (case-insensitive)",
+        help="only switches whose name contains TEXT",
     )
 
 
