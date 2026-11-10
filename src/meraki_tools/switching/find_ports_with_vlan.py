@@ -1,137 +1,113 @@
-import os
-from pathlib import Path
-import logging
-import meraki
-import pandas as pd
-from meraki_tools.core.legacy import connect_to_meraki, meraki_error, other_error
+"""List every switch port that carries a VLAN.
 
-# Set Pandas display options
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_colwidth', None)
+A port carries the VLAN when it is:
 
-API_KEY = os.getenv('MERAKI_API_KEY')
+* an access port on that VLAN (or using it as the voice VLAN), or
+* a trunk with it as the native VLAN or in its allowed list.
 
-# Logging
-logging_dir = Path('logs')
-if not logging_dir.exists():
-    logging_dir.mkdir(parents=True)
+Trunks that allow all VLANs technically carry every VLAN, so they are left
+out unless you add ``--include-all-trunks``; otherwise every uplink would
+appear in the results.
 
-# Configure log file names, level and content
-script_name = os.path.basename(__file__)
-script_name = os.path.splitext(script_name)[0]
-log_file_name = f"{script_name}.log"
-logging.basicConfig(filename=f'logs/{log_file_name}',
-                    level=logging.WARNING,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-logging.getLogger().setLevel(logging.WARNING)
-logging.getLogger('meraki').setLevel(logging.WARNING)
+Examples:
+    Show the ports carrying VLAN 100:
 
-vlan_to_find = 100
+        meraki-tools find-ports-with-vlan 100
+
+    Save them to a CSV in output/find_ports_with_vlan/:
+
+        meraki-tools find-ports-with-vlan 100 --network Junior --csv
+"""
+
+from __future__ import annotations
+
+import argparse
+from collections.abc import Sequence
+
+from meraki_tools.core.cli import ToolContext, add_switch_filters, base_parser, run_tool, vlan_id
+from meraki_tools.core.output import dated_output_path, format_table, write_csv
+from meraki_tools.core.switches import Port, iter_switch_ports
+from meraki_tools.core.vlans import parse_vlan_list
+
+TOOL_NAME = "find_ports_with_vlan"
+COLUMNS = ["network", "switch", "port", "name", "type", "native_vlan", "allowed_vlans", "match"]
 
 
-def is_vlan_in_list(vlan, vlan_list_string):
+def match_reason(port: Port, vlan: int, *, include_all_trunks: bool = False) -> str | None:
+    """Return why a port carries the VLAN, or ``None`` if it does not.
+
+    Args:
+        port: Port configuration from the Dashboard API.
+        vlan: The VLAN to look for.
+        include_all_trunks: Count trunks whose allowed list is ``"all"``.
+
+    Returns:
+        A short reason such as ``"access"``, ``"voice"``, ``"native"``,
+        ``"allowed"`` or ``"allowed (all)"``, or ``None``.
     """
-    Checks if the WiFi management vlan number is within the allowedVLan list including with a vlan range
-    :param vlan: Existing VLAN contained within the allowedVlan list. In this case WiFi Management VLAN 16
-    :param vlan_list_string: The list
-    :return: Boolean
-    """
-    # If allowedVlans contains 'all', no need to add it to add the additional VLAN
-    if 'all' in vlan_list_string.lower():
-        return False
+    if port.get("type") == "access":
+        if port.get("vlan") == vlan:
+            return "access"
+        return "voice" if port.get("voiceVlan") == vlan else None
 
-    vlan_list = vlan_list_string.split(',')
+    if port.get("type") != "trunk":
+        return None
+    allowed = parse_vlan_list(port.get("allowedVlans") or "")
+    if allowed is None:
+        return "allowed (all)" if include_all_trunks else None
+    if port.get("vlan") == vlan:
+        return "native"
+    return "allowed" if vlan in allowed else None
 
-    for item in vlan_list:
-        if '-' in item:
-            range_start, range_end = item.split('-')
-            if int(range_start) <= vlan <= int(range_end):
-                return True
-        else:
-            if int(item) == vlan:
-                return True
 
-    return False
+def build_parser() -> argparse.ArgumentParser:
+    """Return the argument parser for this tool."""
+    parser = base_parser(__doc__)
+    parser.add_argument("vlan", type=vlan_id, help="VLAN ID to look for")
+    parser.add_argument(
+        "--include-all-trunks", action="store_true", help='also list trunks that allow "all" VLANs'
+    )
+    parser.add_argument("--csv", action="store_true", help="also save the results to a CSV file")
+    add_switch_filters(parser)
+    return parser
 
-dashboard = meraki.DashboardAPI(api_key=API_KEY,
-                                print_console=False,
-                                output_log=True,
-                                inherit_logging_config=True,
-                                log_file_prefix=f'{__file__}')
 
-# Collect matching port details in a list (then build DF once at the end).
-# This replaces the deprecated DataFrame._append() calls which no longer work
-# reliably in recent pandas versions (append was removed in pandas 2.0).
-ports_data = []
+def run(context: ToolContext) -> int:
+    """Find the matching ports and print or save them."""
+    args, log = context.args, context.logger
+    rows = []
+    for switch, ports in iter_switch_ports(
+        context.dashboard, context.organization_id, network=args.network, switch_name=args.switch
+    ):
+        for port in ports:
+            reason = match_reason(port, args.vlan, include_all_trunks=args.include_all_trunks)
+            if reason:
+                rows.append(
+                    {
+                        "network": switch.network_name,
+                        "switch": switch.name,
+                        "port": port["portId"],
+                        "name": port.get("name"),
+                        "type": port.get("type"),
+                        "native_vlan": port.get("vlan"),
+                        "allowed_vlans": port.get("allowedVlans") if port.get("type") == "trunk" else "",
+                        "match": reason,
+                    }
+                )
 
-# Get organizations
-try:
-    organizations = dashboard.organizations.getOrganizations()
-except meraki.APIError as e:
-    logging.info(f"{e}")
-    meraki_error(e)
-except Exception as e:
-    other_error(e)
+    log.info("Found %d ports carrying VLAN %d", len(rows), args.vlan)
+    if rows:
+        print(format_table(rows, COLUMNS))
+    if args.csv:
+        path = write_csv(rows, COLUMNS, dated_output_path(TOOL_NAME, f"vlan_{args.vlan}_ports", ".csv"))
+        log.info("Saved %s", path)
+    return 0
 
-# Get networks for each organization
-for org in organizations:
-    try:
-        networks = dashboard.organizations.getOrganizationNetworks(organizationId=org['id'])
-    except meraki.APIError as e:
-        meraki_error(e)
-    except Exception as e:
-        other_error(e)
 
-    # Only retain networks that contain switches
-    networks = [n for n in networks if 'switch' in n['productTypes'] and 'junior' in n['name'].lower()]
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run the tool from the command line."""
+    return run_tool(TOOL_NAME, build_parser(), run, argv)
 
-    # Get all the devices on each network
-    for network in networks:
-        try:
-            devices = dashboard.networks.getNetworkDevices(networkId=network['id'])
-        except meraki.APIError as e:
-            meraki_error(e)
-        except Exception as e:
-            other_error(e)
 
-        # Only interested in the Switch devices
-        switches = [d for d in devices if d['model'].startswith('MS')]
-
-        for switch in switches:
-            try:
-                switch_ports = dashboard.switch.getDeviceSwitchPorts(serial=switch['serial'])
-            except meraki.APIError as e:
-                meraki_error(e)
-            except Exception as e:
-                other_error(e)
-
-            for port in switch_ports:
-                if port['type'] == 'trunk':
-                    # If the current port is a trunk, look for VLAN number in multiple attributes of the port
-                    if ((port['vlan'] == vlan_to_find and 'all' not in port['allowedVlans']) or
-                            (port['vlan'] == 1001 and is_vlan_in_list(vlan_to_find, port['allowedVlans']) == True)):
-
-                        # Add switch port details to list (instead of DF append)
-                        ports_data.append({
-                            'Switch Name': switch['name'],
-                            'Port Number': port['portId'],
-                            'Port Type': port['type']
-                        })
-                elif port['type'] == 'access':
-                    # If the current port is an access port, check if the 'vlan' attribute matches the vlan_to_find
-                    if port['vlan'] == vlan_to_find:
-                        ports_data.append({
-                            'Switch Name': switch['name'],
-                            'Port Number': port['portId'],
-                            'Port Type': port['type']
-                        })
-
-# Build the DataFrame once from the collected list (best practice + performant)
-if ports_data:
-    df_switch_details = pd.DataFrame(ports_data)
-else:
-    df_switch_details = pd.DataFrame(columns=['Switch Name', 'Port Number', 'Port Type'])
-
-print(df_switch_details)
+if __name__ == "__main__":
+    raise SystemExit(main())

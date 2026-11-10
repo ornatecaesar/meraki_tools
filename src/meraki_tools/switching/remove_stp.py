@@ -1,129 +1,77 @@
-# remove_stp.py
+"""Disable RSTP and enable BPDU guard on access ports.
 
+Access ports should only ever connect to end devices, so running spanning
+tree on them only slows down link-up. BPDU guard then shuts a port down if a
+switch is plugged into it, which protects the network from accidental loops.
+
+Ports that are already set this way are skipped, so the tool is safe to run
+repeatedly.
+
+Examples:
+    Preview the changes for every switch in the organisation:
+
+        meraki-tools remove-stp
+
+    Apply them to switches in networks whose name contains "College":
+
+        meraki-tools remove-stp --network College --apply
 """
-Disable RSTP and enable BPDUGuard on all access ports
-"""
 
-import json
-import meraki
-import os
-from pathlib import Path
-from pprint import pprint
-import logging
-from meraki_tools.core.legacy import connect_to_meraki, meraki_error, other_error
+from __future__ import annotations
 
-# Constants
-API_KEY = os.getenv('MERAKI_API_KEY')
-LOG_PATH = Path('logs')
+import argparse
+from collections.abc import Sequence
 
-# Variables
+from meraki_tools.core import ActionBatcher
+from meraki_tools.core.cli import ToolContext, add_switch_filters, base_parser, finish_changes, run_tool
+from meraki_tools.core.switches import Port, iter_switch_ports, port_resource
 
-if not LOG_PATH.exists():
-    LOG_PATH.mkdir(parents=True)
+TOOL_NAME = "remove_stp"
 
-# Get script file name and strip the .py extension
-script_name = os.path.basename(__file__)
-script_name = os.path.splitext(script_name)[0]
-log_file_name = f"{script_name}.log"
-logging.basicConfig(filename=f'logs/{log_file_name}.log',
-                    level=logging.WARNING,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
+#: Port settings this tool enforces on access ports.
+TARGET_SETTINGS = {"rstpEnabled": False, "stpGuard": "bpdu guard"}
 
-dashboard = connect_to_meraki(API_KEY)
 
-# List for added action batches
-actions = []
+def needs_change(port: Port) -> bool:
+    """Return whether an access port still needs RSTP disabling or BPDU guard.
 
-# Get organizations
-print(f"Obtaining organizations...")
-logging.info(f'Obtaining organizations...')
-try:
-    organizations = dashboard.organizations.getOrganizations()
-except meraki.APIError as e:
-    meraki_error(e)
-    logging.error(e)
-    exit(1)
-except Exception as e:
-    other_error(e)
-    logging.error(e)
-    exit(1)
+    Args:
+        port: Port configuration from the Dashboard API.
 
-# Get networks
-print(f"Obtaining networks in Organization: {organizations[0]['name']}.")
-try:
-    networks = dashboard.organizations.getOrganizationNetworks(organizationId=organizations[0]['id'])
-except meraki.APIError as e:
-    meraki_error(e)
-    logging.error(e)
-    exit(1)
-except Exception as e:
-    other_error(e)
-    logging.error(e)
-    exit(1)
+    Returns:
+        ``True`` for access ports whose settings differ from :data:`TARGET_SETTINGS`.
+    """
+    if port.get("type") != "access":
+        return False
+    return any(port.get(key) != value for key, value in TARGET_SETTINGS.items())
 
-networks = [n for n in networks if 'switch' in n['productTypes']]
 
-# For each network, get all Meraki devices
-for network in networks:
-    print(f"Obtaining switches in network: {network['name']}.")
-    try:
-        switches = dashboard.networks.getNetworkDevices(networkId=network['id'])
-    except meraki.APIError as e:
-        meraki_error(e)
-        logging.error(e)
-        exit(1)
-    except Exception as e:
-        other_error(e)
-        logging.error(e)
-        exit(1)
+def build_parser() -> argparse.ArgumentParser:
+    """Return the argument parser for this tool."""
+    parser = base_parser(__doc__, changes_config=True)
+    add_switch_filters(parser)
+    return parser
 
-    # Remove all non-switch devices
-    switches = [s for s in switches if 'MS' in s['model']]
-    # switches = [s for s in switches if 'C-SW-WHG-02' in s['name']]
 
-    for switch in switches:
-        # Get all ports on the switch
-        print(f"Obtaining ports on switch {switch['name']} on the {network['name']} network.")
-        try:
-            switch_ports = dashboard.switch.getDeviceSwitchPorts(serial=switch['serial'])
-        except meraki.APIError as e:
-            meraki_error(e)
-            logging.error(e)
-            exit(1)
-        except Exception as e:
-            other_error(e)
-            logging.error(e)
-            exit(1)
+def run(context: ToolContext) -> int:
+    """Queue an update for every access port that needs it."""
+    args, log = context.args, context.logger
 
-        # iterate over the ports and if the current port is an access port, add the port to the action batch
-        for port in switch_ports:
-            if port['type'] == 'access':
-                if len(actions) < 100:
-                    actions.append(
-                        {
-                            'resource': f"/devices/{switch['serial']}/switch/ports/{port['portId']}",
-                            'operation': 'update',
-                            'body': {
-                                'rstpEnabled': False,
-                                'stpGuard': 'bpdu guard'
-                            }
-                        }
-                    )
-                    logging.info(f"Adding port {port['portId']} on switch {switch['name']} to action batch.")
+    with ActionBatcher(context.dashboard, context.organization_id, dry_run=context.dry_run) as batcher:
+        for switch, ports in iter_switch_ports(
+            context.dashboard, context.organization_id, network=args.network, switch_name=args.switch
+        ):
+            for port in filter(needs_change, ports):
+                log.info("%s port %s: disable RSTP, enable BPDU guard", switch.name, port["portId"])
+                batcher.update(port_resource(switch.serial, port["portId"]), dict(TARGET_SETTINGS))
 
-        if len(actions) >= 1:
-            try:
-                print(f"Sending action batch to Meraki for processing.")
-                response = dashboard.organizations.createOrganizationActionBatch(
-                    organizationId=organizations[0]['id'],
-                    actions=actions,
-                    confirmed=True,
-                    synchronous=False
-                )
-            except Exception as e:
-                logging.error(f"Unable to perform action batch on switch {switch['name']}. Error: {e}")
+    return finish_changes(context, batcher, "access ports")
 
-            actions = []
 
-        pprint(response, indent=4)
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run the tool from the command line."""
+    return run_tool(TOOL_NAME, build_parser(), run, argv)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

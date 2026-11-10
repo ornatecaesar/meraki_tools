@@ -5,12 +5,15 @@
 # ---------------------------------------------------------------------------
 logs/
 *.log
-/backup_json/
+# Output folders are matched anywhere in the tree, so files a tool writes
+# from an unexpected working directory are still ignored. /backups/ stays
+# anchored to the root because src/meraki_tools/backups is a package.
+output/
+backup_json/
+csv_exports/
+exports/
+reports/
 /backups/
-/csv_exports/
-/exports/
-/output/
-/reports/
 *.csv
 *.xlsx
 *.pdf

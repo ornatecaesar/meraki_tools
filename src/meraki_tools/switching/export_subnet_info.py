@@ -1,107 +1,107 @@
-# export_subnet_info.py
+"""Export every layer 3 interface (SVI) on your switches and switch stacks to CSV.
 
+For each routed interface it records the network, switch or stack, interface
+name, VLAN, subnet and interface IP. Stack members are covered by their
+stack's interfaces, so they are not queried individually. Switches that do
+not do layer 3 routing are skipped.
+
+The CSV is written to ``output/export_subnet_info/l3_interfaces_<date>.csv``.
+
+Example:
+    meraki-tools export-subnet-info --network College
 """
-Exports all info regarding switch subnets and interfaces to a json file
-"""
-import pathlib
+
+from __future__ import annotations
+
+import argparse
+from collections.abc import Sequence
+from typing import Any
 
 import meraki
-import os
-import json
 
-import pandas as pd
+from meraki_tools.core.cli import ToolContext, base_parser, run_tool
+from meraki_tools.core.errors import format_api_error
+from meraki_tools.core.output import dated_output_path, format_table, write_csv
 
-from meraki_tools.core.legacy import connect_to_meraki, meraki_error, other_error
+TOOL_NAME = "export_subnet_info"
+COLUMNS = ["network", "switch", "name", "vlanId", "subnet", "interfaceIp", "defaultGateway"]
 
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_colwidth', None)
 
-# Connect to Meraki dashboard
-dashboard = connect_to_meraki()
+def interface_rows(interfaces: list[dict[str, Any]], *, network: str, switch: str) -> list[dict[str, Any]]:
+    """Return one CSV row per routed interface.
 
-# Collect interface info in a list
-interface_data = []
+    Args:
+        interfaces: Interfaces from the Dashboard API.
+        network: Network name to record against each row.
+        switch: Switch or stack name to record against each row.
+    """
+    return [
+        {
+            "network": network,
+            "switch": switch,
+            **{key: interface.get(key) for key in COLUMNS[2:]},
+        }
+        for interface in interfaces
+    ]
 
-# Attempt to obtain organizations
-try:
-    organizations = dashboard.organizations.getOrganizations()
-except meraki.APIError as e:
-    meraki_error(e)
-except Exception as e:
-    other_error(e)
 
-# Loop through the organizations
-for org in organizations:
-    # Attempt to obtain all networks in the organization
-    try:
-        networks = dashboard.organizations.getOrganizationNetworks(organizationId=org['id'])
-    except meraki.APIError as e:
-        meraki_error(e)
-    except Exception as e:
-        other_error(e)
+def build_parser() -> argparse.ArgumentParser:
+    """Return the argument parser for this tool."""
+    parser = base_parser(__doc__)
+    parser.add_argument(
+        "--network",
+        metavar="TEXT",
+        help="only networks whose name contains TEXT (case-insensitive)",
+    )
+    parser.add_argument("--show", action="store_true", help="also print the table to the console")
+    return parser
 
-    # Drop networks that don't contain switches
-    networks = [n for n in networks if 'switch' in n['productTypes']]
 
-    # For each network
-    # Get all stacks on the network
-    for net in networks:
-        try:
-            stacks = dashboard.switch.getNetworkSwitchStacks(networkId=net['id'])
-        except meraki.APIError as e:
-            meraki_error(e)
-        except Exception as e:
-            other_error(e)
+def run(context: ToolContext) -> int:
+    """Collect routed interfaces from every switch and stack, then write the CSV."""
+    dashboard, org_id, args, log = context.dashboard, context.organization_id, context.args, context.logger
 
-        # Get all devices on the network
-        try:
-            devices = dashboard.networks.getNetworkDevices(networkId=net['id'])
-        except meraki.APIError as e:
-            meraki_error(e)
-        except Exception as e:
-            other_error(e)
+    networks = dashboard.organizations.getOrganizationNetworks(
+        org_id, productTypes=["switch"], total_pages="all"
+    )
+    if args.network:
+        networks = [n for n in networks if args.network.lower() in n["name"].lower()]
+    switches = dashboard.organizations.getOrganizationDevices(
+        org_id, productTypes=["switch"], total_pages="all"
+    )
 
-        # Discard all non-switch devices
-        devices = [d for d in devices if d['model'].startswith('MS')]
-
-        # Get set of all serial numbers of switches that are members of stacks
-        stack_serials = {serial for stack in stacks for serial in stack['serials']}
-
-        # Check if the serial number of a switch is a stack member. If not, get the L3 interface info
-        for device in devices:
-            if device['serial'] not in stack_serials:
-                l3_interface_info = dashboard.switch.getDeviceSwitchRoutingInterfaces(serial=device['serial'])
-                for l3_interface in l3_interface_info:
-                    interface_data.append({
-                        'name': l3_interface['name'],
-                        'subnet': l3_interface['subnet'],
-                        'interfaceIp': l3_interface['interfaceIp'],
-                        'vlanId': l3_interface['vlanId'],
-                        'switch': device['name'],
-                        'network': net['name']
-                    })
+    rows: list[dict[str, Any]] = []
+    for network in sorted(networks, key=lambda n: n["name"].lower()):
+        stacks = dashboard.switch.getNetworkSwitchStacks(network["id"])
+        stacked = {serial for stack in stacks for serial in stack.get("serials", [])}
 
         for stack in stacks:
-            l3_interface_info = dashboard.switch.getNetworkSwitchStackRoutingInterfaces(networkId=net['id'], switchStackId=stack['id'])
-            for l3_interface in l3_interface_info:
-                interface_data.append({
-                    'name': l3_interface['name'],
-                    'subnet': l3_interface['subnet'],
-                    'interfaceIp': l3_interface['interfaceIp'],
-                    'vlanId': l3_interface['vlanId'],
-                    'switch': stack['name'],
-                    'network': net['name']
-                })
+            interfaces = dashboard.switch.getNetworkSwitchStackRoutingInterfaces(network["id"], stack["id"])
+            rows += interface_rows(interfaces, network=network["name"], switch=stack["name"])
 
-# Build final DataFrame from the collected list
-if interface_data:
-    interface_data_df = pd.DataFrame(interface_data)
-else:
-    interface_data_df = pd.DataFrame(columns=['name', 'subnet', 'interfaceIp', 'vlanId', 'switch', 'network'])
+        for switch in switches:
+            if switch.get("networkId") != network["id"] or switch["serial"] in stacked:
+                continue
+            name = switch.get("name") or switch["serial"]
+            try:
+                interfaces = dashboard.switch.getDeviceSwitchRoutingInterfaces(switch["serial"])
+            except meraki.APIError as error:
+                # Layer 2-only models reject this call; nothing to export for them.
+                log.debug("Skipping %s: %s", name, format_api_error(error))
+                continue
+            rows += interface_rows(interfaces, network=network["name"], switch=name)
 
-# Ensure directory exists
-export_dir = pathlib.Path('csv_exports')
-export_dir.mkdir(parents=True, exist_ok=True)
+    path = write_csv(rows, COLUMNS, dated_output_path(TOOL_NAME, "l3_interfaces", ".csv"))
+    log.info("Exported %d interfaces from %d networks to %s", len(rows), len(networks), path)
+    if args.show and rows:
+        print(format_table(rows, COLUMNS))
+    return 0
 
-# Export dataframe to csv
-interface_data_df.to_csv(export_dir / 'interface_info_df.csv', header=True, index=False)
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run the tool from the command line."""
+    return run_tool(TOOL_NAME, build_parser(), run, argv)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
