@@ -1,76 +1,103 @@
-import os
-from pathlib import Path
-import logging
+"""Back up MX security appliance layer 3 firewall rules to JSON.
+
+Saves the L3 outbound rules of every network that has a security appliance,
+plus the organisation's policy objects and policy object groups that those
+rules can refer to, so a rule set can be read or restored later.
+
+Files are written to a dated folder::
+
+    output/backup_l3_firewall_rules/<date>/
+        <network name>_l3_firewall_rules.json
+        policy_objects.json
+        policy_object_groups.json
+
+Firewall rules describe how your network is protected, so these files are
+git-ignored and should be stored somewhere access-controlled.
+
+Example:
+    meraki-tools backup-l3-firewall-rules --network "Head Office"
+"""
+
+from __future__ import annotations
+
+import argparse
 import json
-import meraki
+import re
+from collections.abc import Sequence
+from datetime import date
+from pathlib import Path
+from typing import Any
 
-# Logging
-logging_dir = Path('logs')
-if not logging_dir.exists():
-    logging_dir.mkdir(parents=True)
+from meraki_tools.core.cli import ToolContext, base_parser, run_tool
+from meraki_tools.core.paths import output_dir
 
-# Configure log file names, level and content
-script_name = os.path.basename(__file__)
-script_name = os.path.splitext(script_name)[0]
-log_file_name = f"{script_name}.log"
-logging.basicConfig(filename=f'logs/{log_file_name}',
-                    level=logging.WARNING,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-logging.getLogger().setLevel(logging.WARNING)
-logging.getLogger('meraki').setLevel(logging.WARNING)
+TOOL_NAME = "backup_l3_firewall_rules"
 
-# Connect to the Dashboard
-try:
-    dashboard = meraki.DashboardAPI(api_key=os.environ.get('MERAKI_API_KEY'))
-except meraki.APIError as e:
-    logging.error(f"API error occured: {e}")
-except Exception as e:
-    logging.error(f"Unexpected error occured: {e}")
 
-# Get organizations
-try:
-    organizations = dashboard.organizations.getOrganizations()
-except meraki.APIError as e:
-    logging.error(f"API error occured: {e}")
-except Exception as e:
-    logging.error(f"Unexpected error occured: {e}")
+def safe_filename(name: str) -> str:
+    """Return a network name made safe for use in a file name.
 
-# Get all the networks
-try:
-    networks = dashboard.organizations.getOrganizationNetworks(organizationId=organizations[0]['id'])
-except meraki.APIError as e:
-    logging.error(f"API error occured: {e}")
-except Exception as e:
-    logging.error(f"Unexpected error occured: {e}")
+    Example:
+        >>> safe_filename("Head Office / DMZ")
+        'Head_Office_DMZ'
+    """
+    return re.sub(r"[^A-Za-z0-9._-]+", "_", name).strip("_") or "network"
 
-# Filter out necessary networks
-networks = [n for n in networks if 'Junior' in n['name']]
 
-# Get firewall rules
-try:
-    rules = dashboard.appliance.getNetworkApplianceFirewallL3FirewallRules(networkId=networks[0]['id'])
-except meraki.APIError as e:
-    logging.error(f"API error occured: {e}")
-except Exception as e:
-    logging.error(f"Unexpected error occured: {e}")
+def write_json(data: Any, path: Path) -> Path:
+    """Write data as indented JSON and return the path."""
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    return path
 
-# Get policy objects
-try:
-    policy_objects = dashboard.organizations.getOrganizationPolicyObjects(organizationId=organizations[0]['id'])
-except meraki.APIError as e:
-    logging.error(f"API error occured: {e}")
-except Exception as e:
-    logging.error(f"Unexpected error occured: {e}")
 
-# Export firewall rules to JSON
-backup_dir = Path('backup_json/l3_firewall_rules/')
-backup_dir.mkdir(parents=True, exist_ok=True)
-firewall_rules_file = backup_dir / 'js_l3_firewall_rules.json'
-policy_objects_file = backup_dir / 'policy_objects.json'
+def build_parser() -> argparse.ArgumentParser:
+    """Return the argument parser for this tool."""
+    parser = base_parser(__doc__)
+    parser.add_argument(
+        "--network",
+        metavar="TEXT",
+        help="only networks whose name contains TEXT (case-insensitive)",
+    )
+    return parser
 
-with open(firewall_rules_file, 'w') as f:
-    json.dump(rules, f, indent=4)
 
-with open(policy_objects_file, 'w') as f:
-    json.dump(policy_objects, f, indent=4)
+def run(context: ToolContext) -> int:
+    """Export the rules of every matching appliance network and the policy objects."""
+    dashboard, org_id, args, log = context.dashboard, context.organization_id, context.args, context.logger
+
+    networks = dashboard.organizations.getOrganizationNetworks(
+        org_id, productTypes=["appliance"], total_pages="all"
+    )
+    if args.network:
+        networks = [n for n in networks if args.network.lower() in n["name"].lower()]
+    if not networks:
+        log.warning("No networks with a security appliance found, so there is nothing to back up")
+        return 0
+
+    folder = output_dir(TOOL_NAME) / date.today().isoformat()
+    folder.mkdir(parents=True, exist_ok=True)
+
+    for network in sorted(networks, key=lambda n: n["name"].lower()):
+        rules = dashboard.appliance.getNetworkApplianceFirewallL3FirewallRules(network["id"])
+        path = write_json(
+            {"network": {"id": network["id"], "name": network["name"]}, **rules},
+            folder / f"{safe_filename(network['name'])}_l3_firewall_rules.json",
+        )
+        log.info("%s: %d rules saved to %s", network["name"], len(rules.get("rules", [])), path.name)
+
+    objects = dashboard.organizations.getOrganizationPolicyObjects(org_id, total_pages="all")
+    groups = dashboard.organizations.getOrganizationPolicyObjectsGroups(org_id, total_pages="all")
+    write_json(objects, folder / "policy_objects.json")
+    write_json(groups, folder / "policy_object_groups.json")
+    log.info("Saved %d policy objects and %d groups", len(objects), len(groups))
+    log.info("Backup written to %s", folder)
+    return 0
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run the tool from the command line."""
+    return run_tool(TOOL_NAME, build_parser(), run, argv)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

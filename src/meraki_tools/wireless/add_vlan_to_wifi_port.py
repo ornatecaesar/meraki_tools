@@ -1,157 +1,65 @@
-import os
-from pathlib import Path
-import logging
-import meraki
-from meraki_tools.core.legacy import connect_to_meraki, meraki_error, other_error
+"""Add a VLAN to every switch trunk that carries access point traffic.
 
-API_KEY = os.getenv('MERAKI_API_KEY')
+Use this when a new SSID with its own VLAN is added, so that the VLAN reaches
+every access point. Ports that already allow the VLAN are skipped.
 
-# Logging
-logging_dir = Path('logs')
-if not logging_dir.exists():
-    logging_dir.mkdir(parents=True)
+See :mod:`meraki_tools.wireless.ap_trunks` for how ports are chosen.
 
-# Configure log file names, level and content
-script_name = os.path.basename(__file__)
-script_name = os.path.splitext(script_name)[0]
-log_file_name = f"{script_name}.log"
-logging.basicConfig(filename=f'logs/{log_file_name}',
-                    level=logging.WARNING,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-logging.getLogger().setLevel(logging.WARNING)
-logging.getLogger('meraki').setLevel(logging.WARNING)
+Examples:
+    Preview adding VLAN 790 to AP ports (native VLAN 16) and the uplinks
+    between switches (native VLAN 1001):
 
-actions = []
-vlan_to_add = 790
+        meraki-tools add-vlan-to-ap-trunks 790 --ap-vlan 16 --uplink-native-vlan 1001
 
+    Apply it on switches whose name contains "SW-ARK":
 
-def is_vlan_in_list(vlan, vlan_list_string):
-    """
-    Checks if the WiFi management vlan number is within the allowedVLan list including with a vlan range
-    :param vlan: Existing VLAN contained within the allowedVlan list. In this case WiFi Management VLAN 16
-    :param vlan_list_string: The list
-    :return: Boolean
-    """
-    # If allowedVlans contains 'all', no need to add it to add the additional VLAN
-    if 'all' in vlan_list_string.lower():
-        return False
+        meraki-tools add-vlan-to-ap-trunks 790 --ap-vlan 16 --switch SW-ARK --apply
+"""
 
-    vlan_list = vlan_list_string.split(',')
+from __future__ import annotations
 
-    for item in vlan_list:
-        if '-' in item:
-            range_start, range_end = item.split('-')
-            if int(range_start) <= vlan <= int(range_end):
-                return True
-        else:
-            if int(item) == vlan:
-                return True
+import argparse
+from collections.abc import Sequence
 
-    return False
+from meraki_tools.core import ActionBatcher
+from meraki_tools.core.cli import ToolContext, finish_changes, run_tool
+from meraki_tools.core.switches import iter_switch_ports, port_resource
+from meraki_tools.core.vlans import add_vlan_to_list
+from meraki_tools.wireless import ap_trunks
+
+TOOL_NAME = "add_vlan_to_wifi_port"
 
 
-dashboard = connect_to_meraki(API_KEY)
-
-# Get organizations
-try:
-    organizations = dashboard.organizations.getOrganizations()
-except meraki.APIError as e:
-    meraki_error(e)
-except Exception as e:
-    other_error(e)
-
-# Get networks for each organization
-for org in organizations:
-    try:
-        networks = dashboard.organizations.getOrganizationNetworks(organizationId=org['id'])
-    except meraki.APIError as e:
-        meraki_error(e)
-    except Exception as e:
-        other_error(e)
-
-    # Only retain networks that contain switches
-    networks = [n for n in networks if 'switch' in n['productTypes']]
-
-    # Get all the devices on each network
-    for network in networks:
-        try:
-            devices = dashboard.networks.getNetworkDevices(networkId=network['id'])
-        except meraki.APIError as e:
-            meraki_error(e)
-        except Exception as e:
-            other_error(e)
-
-        # Only interested in the Switch devices
-        switches = [d for d in devices if d['model'].startswith('MS')]
-        switches = [s for s in switches if 'J-SW-ARK' in s['name']]
-
-        for switch in switches:
-            try:
-                switch_ports = dashboard.switch.getDeviceSwitchPorts(serial=switch['serial'])
-            except meraki.APIError as e:
-                meraki_error(e)
-            except Exception as e:
-                other_error(e)
+def build_parser() -> argparse.ArgumentParser:
+    """Return the argument parser for this tool."""
+    return ap_trunks.build_parser(__doc__)
 
 
-            for port in switch_ports:
+def run(context: ToolContext) -> int:
+    """Queue an update for every access point trunk that lacks the VLAN."""
+    args, log = context.args, context.logger
 
-                if (port['type'] == 'trunk' and (
-                        (port['vlan'] == 16 and 'all' not in port['allowedVlans']) or
-                        (port['vlan'] == 1001 and is_vlan_in_list(16, port['allowedVlans']) == True))):
+    with ActionBatcher(context.dashboard, context.organization_id, dry_run=context.dry_run) as batcher:
+        for switch, ports in iter_switch_ports(
+            context.dashboard, context.organization_id, network=args.network, switch_name=args.switch
+        ):
+            for port in ports:
+                if not ap_trunks.is_ap_trunk(port, args.ap_vlan, args.uplink_native_vlan):
+                    continue
+                old = port["allowedVlans"]
+                new = add_vlan_to_list(args.vlan, old)
+                if new == old:
+                    continue
+                log.info("%s port %s: allowed VLANs %s -> %s", switch.name, port["portId"], old, new)
+                batcher.update(port_resource(switch.serial, port["portId"]), {"allowedVlans": new})
 
-
-                    logging.info(f"Adding port {port['portId']} on switch {switch['name']} to action batch.")
-
-                    # Append new VLAN to currently allowed VLANs
-                    allowed_vlans = port['allowedVlans']
-                    allowed_vlans += f",{vlan_to_add}"
-
-                    # Add new allowed_vlans to action batch
-                    actions.append(
-                        {
-                            "resource": f"/devices/{switch['serial']}/switch/ports/{port['portId']}",
-                            'operation': 'update',
-                            'body': {
-                                'allowedVlans': allowed_vlans
-                            }
-                        }
-                    )
-
-                    # If the number of action in the batch is 20, execute to the action batch
-                    if len(actions) == 20:
-                        try:
-                            logging.info(f"Executing Action Batch")
-                            response = dashboard.organizations.createOrganizationActionBatch(
-                                organizationId=org['id'],
-                                actions=actions,
-                                confirmed=True,
-                                synchronous=True
-                            )
-                            logging.info(f"Completed processing Action Batch.")
-                            actions = []
-                        except meraki.APIError as e:
-                            logging.error(f"Unable to execute action batch: {e}")
-                            actions = [] # Reset actions even if batch execution fails
-                        except Exception as e:
-                            logging.error(f"An unexpected error occured: {e}")
-                            actions = []
-
-    # After all loops, execute any remaining actions
-    if actions:
-        try:
-            logging.info(f"Executing Final Action Batch with {len(actions)} actions.")
-            response = dashboard.organizations.createOrganizationActionBatch(
-                organizationId=org['id'],
-                actions=actions,
-                confirmed=True,
-                synchronous=True
-            )
-        except meraki.APIError as e:
-            logging.error(f"Unable to execute final action batch: {e}")
-        except Exception as e:
-            logging.error(f"An unexpected error occured: {e}")
+    return finish_changes(context, batcher, "trunk ports")
 
 
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run the tool from the command line."""
+    return run_tool(TOOL_NAME, build_parser(), run, argv)
 
+
+if __name__ == "__main__":
+    raise SystemExit(main())

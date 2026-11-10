@@ -577,31 +577,29 @@ source = { editable = "." }
 dependencies = [
     { name = "matplotlib" },
     { name = "meraki" },
-    { name = "pandas" },
-    { name = "seaborn" },
 ]
 
 [package.dev-dependencies]
 dev = [
-    { name = "pandas-stubs" },
     { name = "pytest" },
     { name = "ruff" },
+]
+notebook = [
+    { name = "pandas" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "matplotlib", specifier = ">=3.10" },
     { name = "meraki", specifier = ">=4.7.0" },
-    { name = "pandas", specifier = ">=3.0" },
-    { name = "seaborn", specifier = ">=0.13.2" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "pandas-stubs", specifier = ">=3.0" },
     { name = "pytest", specifier = ">=9.0" },
     { name = "ruff", specifier = ">=0.17" },
 ]
+notebook = [{ name = "pandas", specifier = ">=3.0" }]
 
 [[package]]
 name = "numpy"
@@ -849,19 +847,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pandas-stubs"
-version = "3.1.0.261029"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
-    { name = "numpy", version = "2.5.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/f9/f8/0346629264426a6693affbc9a0fb52143acfa38112d569f68da514ea503a/pandas_stubs-3.1.0.261029.tar.gz", hash = "sha256:dcfb5b14d399beae72cce558db6d2a0d89c10301275557f1c00d5393e9cb190e", size = 119466, upload-time = "2026-10-29T17:09:31.352Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c0/2c/ecbc04b2a8d05d737351a54398f843223cb66edf42ec5c0fcc6198f17d3a/pandas_stubs-3.1.0.261029-py3-none-any.whl", hash = "sha256:70f631f2d0781c4500b1cd5f84cab7d7279a3d114674d69655536a4a99a3a67f", size = 179851, upload-time = "2026-10-29T17:09:30.112Z" },
-]
-
-[[package]]
 name = "pillow"
 version = "13.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1029,21 +1014,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/b9/ab/d8e407669ffe5014429baf780c2df47e001968a6e4c17f615e2e7b13a9ba/ruff-0.17.4-py3-none-win32.whl", hash = "sha256:3971a78cba76298b284c8321e6d40d93045ed348bec5c369d85099efc97fb7cf", size = 9931993, upload-time = "2026-11-05T18:52:11.169Z" },
     { url = "https://files.pythonhosted.org/packages/bd/15/42af8a72d8946e3c9efd2bbf6641e462b6832783b0d043d63ef5b280ba7f/ruff-0.17.4-py3-none-win_amd64.whl", hash = "sha256:67c5a894fc054cf41f75f7afa24815de5a74329d97634126c2a1015740ff4e8c", size = 10292922, upload-time = "2026-11-05T18:52:13.436Z" },
     { url = "https://files.pythonhosted.org/packages/68/9e/f1dbffcfb8ff25dadbc21f87a8b73c3848abe4abada9d4b08ccef8bec40c/ruff-0.17.4-py3-none-win_arm64.whl", hash = "sha256:181ae38a9a8fb94925bf7d0794327b48d7fd7f4b50cfd84c0e999cc09ef8d131", size = 9889396, upload-time = "2026-11-05T18:52:15.549Z" },
-]
-
-[[package]]
-name = "seaborn"
-version = "0.13.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "matplotlib" },
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
-    { name = "numpy", version = "2.5.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "pandas" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/86/59/a451d7420a77ab0b98f7affa3a1d78a313d2f7281a57afb1a34bae8ab412/seaborn-0.13.2.tar.gz", hash = "sha256:93e60a40988f4d65e9f4885df477e2fdaff6b73a9ded434c1ab356dd57eefff7", size = 1457696, upload-time = "2024-01-25T13:21:52.551Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/83/11/00d3c3dfc25ad54e731d91449895a79e4bf2384dc3ac01809010ba88f6d5/seaborn-0.13.2-py3-none-any.whl", hash = "sha256:636f8336facf092165e27924f223d3c62ca560b1f2bb5dff7ab7fad265361987", size = 294914, upload-time = "2024-01-25T13:21:49.598Z" },
 ]
 
 [[package]]
