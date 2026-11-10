@@ -11,7 +11,7 @@ import json
 
 import pandas as pd
 
-from meraki_utils import connect_to_meraki, meraki_error, other_error
+from meraki_tools.core.legacy import connect_to_meraki, meraki_error, other_error
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth', None)

@@ -17,7 +17,7 @@ import seaborn as sns
 from matplotlib.backends.backend_pdf import PdfPages
 from meraki import DashboardAPI
 
-from meraki_utils import connect_to_meraki, meraki_error
+from meraki_tools.core.legacy import connect_to_meraki, meraki_error
 
 # ------------------------------
 # Configuration

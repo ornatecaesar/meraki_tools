@@ -10,7 +10,7 @@ import os
 from pathlib import Path
 from pprint import pprint
 import logging
-from meraki_utils import connect_to_meraki, meraki_error, other_error
+from meraki_tools.core.legacy import connect_to_meraki, meraki_error, other_error
 
 # Constants
 API_KEY = os.getenv('MERAKI_API_KEY')

@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import logging
 import meraki
-from meraki_utils import connect_to_meraki, meraki_error, other_error
+from meraki_tools.core.legacy import connect_to_meraki, meraki_error, other_error
 
 API_KEY = os.getenv('MERAKI_API_KEY')
 
