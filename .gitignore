@@ -5,12 +5,12 @@
 # ---------------------------------------------------------------------------
 logs/
 *.log
-backup_json/
-backups/
-csv_exports/
-exports/
-output/
-reports/
+/backup_json/
+/backups/
+/csv_exports/
+/exports/
+/output/
+/reports/
 *.csv
 *.xlsx
 *.pdf
