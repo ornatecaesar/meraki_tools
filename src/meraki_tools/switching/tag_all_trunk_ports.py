@@ -1,90 +1,94 @@
-# tag_all_trunk_ports.py
+"""Add a tag to trunk ports so they are easy to find and filter in the Dashboard.
 
+Ports that already have the tag are skipped, and existing tags are kept.
+
+Examples:
+    Preview tagging every trunk port with "Trunk":
+
+        meraki-tools tag-trunk-ports
+
+    Tag only switch-to-switch uplinks (native VLAN 1001) with "Uplink":
+
+        meraki-tools tag-trunk-ports --tag Uplink --native-vlan 1001 --apply
 """
-Add a tag to all trunk ports
-"""
 
-import os
-from pathlib import Path
-import logging
-import meraki
-from meraki_tools.core.legacy import connect_to_meraki, meraki_error, other_error
+from __future__ import annotations
 
-API_KEY = os.getenv('MERAKI_API_KEY')
+import argparse
+from collections.abc import Sequence
 
-# Setup logging
-logging_dir = Path('logs')
-if not logging_dir.exists():
-    logging_dir.mkdir(parents=True)
+from meraki_tools.core import ActionBatcher
+from meraki_tools.core.cli import (
+    ToolContext,
+    add_switch_filters,
+    base_parser,
+    finish_changes,
+    run_tool,
+    vlan_id,
+)
+from meraki_tools.core.switches import Port, iter_switch_ports, port_resource
 
-
-actions = []
-
-dashboard = connect_to_meraki(API_KEY)
-
-# Get organizations
-try:
-    organizations = dashboard.organizations.getOrganizations()
-except meraki.APIError as e:
-    meraki_error(e)
-except Exception as e:
-    other_error(e)
-
-# Get networks for each organization
-for org in organizations:
-    try:
-        networks = dashboard.organizations.getOrganizationNetworks(organizationId=org['id'])
-    except meraki.APIError as e:
-        meraki_error(e)
-    except Exception as e:
-        other_error(e)
-
-    # Only retain networks that contain switches
-    networks = [n for n in networks if 'switch' in n['productTypes']]
-
-    # Get all the devices on each network
-    for network in networks:
-        try:
-            devices = dashboard.networks.getNetworkDevices(networkId=network['id'])
-        except meraki.APIError as e:
-            meraki_error(e)
-        except Exception as e:
-            other_error(e)
+TOOL_NAME = "tag_all_trunk_ports"
 
 
-        # Only interested in the Switch devices
-        switches = [d for d in devices if d['model'].startswith('MS')]
+def tags_after_change(port: Port, tag: str, native_vlan: int | None = None) -> list[str] | None:
+    """Return the port's new tag list, or ``None`` if it should not change.
 
-        for switch in switches:
-            try:
-                switch_ports = dashboard.switch.getDeviceSwitchPorts(serial=switch['serial'])
-            except meraki.APIError as e:
-                meraki_error(e)
-            except Exception as e:
-                other_error(e)
+    Args:
+        port: Port configuration from the Dashboard API.
+        tag: Tag to add.
+        native_vlan: Only change trunks with this native VLAN. ``None`` means any trunk.
 
-            switch_trunk_ports = [port for port in switch_ports if port['type'] == 'trunk' if port['vlan'] == 1001]
+    Returns:
+        The existing tags plus ``tag``, or ``None`` if the port is not a
+        matching trunk or already has the tag.
+    """
+    if port.get("type") != "trunk":
+        return None
+    if native_vlan is not None and port.get("vlan") != native_vlan:
+        return None
+    tags = list(port.get("tags") or [])
+    if tag in tags:
+        return None
+    return [*tags, tag]
 
 
-            for port in switch_trunk_ports:
-                # Get the current tags of the port and append 'Trunk' to list nested in a dictionary
-                if len(actions) < 2:
-                    tags = port['tags']
-                    tags.append('Trunk')
-                    actions.append(
-                        {
-                            'resource': f"devices/{switch['serial']}/switch/ports/{port['portId']}",
-                            'operation': 'update',
-                            'body': {
-                                'tags': tags
-                            }
-                        }
-                    )
+def build_parser() -> argparse.ArgumentParser:
+    """Return the argument parser for this tool."""
+    parser = base_parser(__doc__, changes_config=True)
+    parser.add_argument("--tag", default="Trunk", help="tag to add (default: %(default)s)")
+    parser.add_argument(
+        "--native-vlan",
+        type=vlan_id,
+        metavar="VLAN",
+        help="only tag trunks with this native VLAN (default: every trunk)",
+    )
+    add_switch_filters(parser)
+    return parser
 
-            if len(actions) >= 1:
-                response = dashboard.organizations.createOrganizationActionBatch(
-                    organizationId=org['id'],
-                    actions=actions,
-                    confirmed=True,
-                    synchronous=False
-                )
+
+def run(context: ToolContext) -> int:
+    """Queue a tag update for every matching trunk port."""
+    args, log = context.args, context.logger
+
+    with ActionBatcher(context.dashboard, context.organization_id, dry_run=context.dry_run) as batcher:
+        for switch, ports in iter_switch_ports(
+            context.dashboard, context.organization_id, network=args.network, switch_name=args.switch
+        ):
+            for port in ports:
+                new_tags = tags_after_change(port, args.tag, args.native_vlan)
+                if new_tags is None:
+                    continue
+                log.info("%s port %s: add tag %r", switch.name, port["portId"], args.tag)
+                batcher.update(port_resource(switch.serial, port["portId"]), {"tags": new_tags})
+
+    return finish_changes(context, batcher, "trunk ports")
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run the tool from the command line."""
+    return run_tool(TOOL_NAME, build_parser(), run, argv)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

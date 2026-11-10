@@ -93,7 +93,7 @@ class ActionBatcher:
 
         if self._dry_run:
             for action in actions:
-                logger.info("[dry run] %s %s %s", action["operation"], action["resource"], action["body"])
+                logger.debug("[dry run] %s %s %s", action["operation"], action["resource"], action["body"])
             self.submitted += len(actions)
             return
 
